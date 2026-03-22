@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Space & Order — 홈 수납정리 & 스타일링</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #F7F4EF;
@@ -23,21 +23,16 @@
     --accent-light: #C8DDD9;
     --accent-dark: #6B9E97;
   }
-
-/* ✅ FIX 1: ‘- {}’ → ‘* {}’ */
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-  /* ✅ FIX 2: var(–xxx) en-dash → var(–xxx) double-hyphen 전체 수정 */
-  background: var(–cream);
-  color: var(–charcoal);
-  font-family: ‘Noto Sans KR’, sans-serif;
-  font-weight: 300;
-  overflow-x: hidden;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
   }
 
-/* ══ NAV ══ */
 nav {
 position: fixed; top: 0; left: 0; right: 0; z-index: 200;
 display: flex; align-items: center; justify-content: space-between;
@@ -69,26 +64,13 @@ opacity: 0; transition: opacity 0.3s, color 0.3s, border-color 0.3s;
 }
 .nav-scene-tag.show { opacity: 1; }
 
-/* ══ PAGES ══ */
 .page { display: none; }
 .page.active { display: block; animation: pageIn 0.45s ease both; }
+@keyframes pageIn { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
 
-@keyframes pageIn {
-from { opacity: 0; transform: translateY(16px); }
-to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ══════════════════ MAIN PAGE ══════════════════ */
 #main-page { padding-top: 80px; }
-
-.hero {
-min-height: calc(100vh - 80px);
-display: grid; grid-template-columns: 1fr 1fr;
-}
-.hero-left {
-padding: 80px 48px 80px 56px;
-display: flex; flex-direction: column; justify-content: center;
-}
+.hero { min-height: calc(100vh - 80px); display: grid; grid-template-columns: 1fr 1fr; }
+.hero-left { padding: 80px 48px 80px 56px; display: flex; flex-direction: column; justify-content: center; }
 .hero-eyebrow {
 font-family: ‘DM Mono’, monospace; font-size: 10px; letter-spacing: 0.26em;
 text-transform: uppercase; color: var(–teal-dark); margin-bottom: 32px;
@@ -116,7 +98,6 @@ padding-bottom: 8px; cursor: pointer; transition: all 0.3s; width: fit-content;
 animation: fadeUp 0.9s ease 0.55s both;
 }
 .hero-cta:hover { color: var(–teal-dark); border-color: var(–teal-dark); gap: 24px; }
-
 .hero-right { background: var(–linen); position: relative; overflow: hidden; animation: fadeIn 1.2s ease 0.3s both; }
 .hero-visual {
 width: 100%; height: 100%;
@@ -148,31 +129,20 @@ display: flex; align-items: center; justify-content: space-between;
 .cat-label-text { font-family: ‘DM Mono’, monospace; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(–teal-dark); margin-bottom: 16px; }
 .cat-title { font-family: ‘Cormorant Garamond’, serif; font-size: 52px; font-weight: 300; line-height: 1.05; color: var(–charcoal); }
 .cat-count { font-family: ‘DM Mono’, monospace; font-size: 11px; letter-spacing: 0.16em; color: var(–stone); }
-
 .cat-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 12px; }
-.cat-card:nth-child(1) { grid-column: 1/8; }
-.cat-card:nth-child(2) { grid-column: 8/13; }
-.cat-card:nth-child(3) { grid-column: 1/5; }
-.cat-card:nth-child(4) { grid-column: 5/9; }
-.cat-card:nth-child(5) { grid-column: 9/13; }
-
+.cat-card:nth-child(1){grid-column:1/8;} .cat-card:nth-child(2){grid-column:8/13;}
+.cat-card:nth-child(3){grid-column:1/5;} .cat-card:nth-child(4){grid-column:5/9;} .cat-card:nth-child(5){grid-column:9/13;}
 .cat-card { position: relative; overflow: hidden; border-radius: 2px; cursor: pointer; }
 .cat-card-inner { width: 100%; position: relative; overflow: hidden; }
-.cat-card:nth-child(1) .cat-card-inner,
-.cat-card:nth-child(2) .cat-card-inner { height: 420px; }
-.cat-card:nth-child(3) .cat-card-inner,
-.cat-card:nth-child(4) .cat-card-inner,
-.cat-card:nth-child(5) .cat-card-inner { height: 280px; }
-.cat-bg {
-position: absolute; inset: 0; background-size: cover; background-position: center;
-transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-}
+.cat-card:nth-child(1) .cat-card-inner, .cat-card:nth-child(2) .cat-card-inner { height: 420px; }
+.cat-card:nth-child(3) .cat-card-inner, .cat-card:nth-child(4) .cat-card-inner, .cat-card:nth-child(5) .cat-card-inner { height: 280px; }
+.cat-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
 .cat-card:hover .cat-bg { transform: scale(1.04); }
-.cat-card:nth-child(1) .cat-bg { background: linear-gradient(145deg,#C8DDD9 0%,#A8C4BE 40%,#8AAEA7 100%); }
-.cat-card:nth-child(2) .cat-bg { background: linear-gradient(145deg,#C4D4DC 0%,#A4B8C8 40%,#809EB0 100%); }
-.cat-card:nth-child(3) .cat-bg { background: linear-gradient(145deg,#DCD4E8 0%,#C4B8D4 40%,#A094B8 100%); }
-.cat-card:nth-child(4) .cat-bg { background: linear-gradient(145deg,#C4D8DC 0%,#A4C4C8 40%,#7AAAB0 100%); }
-.cat-card:nth-child(5) .cat-bg { background: linear-gradient(145deg,#D8CCBC 0%,#C4B49C 40%,#A8927C 100%); }
+.cat-card:nth-child(1) .cat-bg{background:linear-gradient(145deg,#C8DDD9 0%,#A8C4BE 40%,#8AAEA7 100%);}
+.cat-card:nth-child(2) .cat-bg{background:linear-gradient(145deg,#C4D4DC 0%,#A4B8C8 40%,#809EB0 100%);}
+.cat-card:nth-child(3) .cat-bg{background:linear-gradient(145deg,#DCD4E8 0%,#C4B8D4 40%,#A094B8 100%);}
+.cat-card:nth-child(4) .cat-bg{background:linear-gradient(145deg,#C4D8DC 0%,#A4C4C8 40%,#7AAAB0 100%);}
+.cat-card:nth-child(5) .cat-bg{background:linear-gradient(145deg,#D8CCBC 0%,#C4B49C 40%,#A8927C 100%);}
 .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top,rgba(30,30,28,0.65) 0%,transparent 55%); transition: opacity 0.4s; }
 .cat-card:hover .cat-overlay { opacity: 0.85; }
 .cat-info { position: absolute; bottom:0; left:0; right:0; padding: 28px 28px 24px; display: flex; align-items: flex-end; justify-content: space-between; }
@@ -182,22 +152,13 @@ transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
 .cat-arrow { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); font-size: 16px; transform: translateY(8px); opacity: 0; transition: all 0.3s; }
 .cat-card:hover .cat-arrow { transform: translateY(0); opacity: 1; background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
 
-/* ══════════════════ SPACE PAGE ══════════════════ */
 #space-page { padding-top: 72px; }
-
 .sp-hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
 .sp-hero-left { padding: 80px 48px 80px 56px; display: flex; flex-direction: column; justify-content: center; }
-.sp-scene-tag {
-display: inline-flex; align-items: center; gap: 10px;
-padding: 6px 16px; background: var(–accent-light); border-radius: 40px;
-font-family: ‘DM Mono’, monospace; font-size: 9px; letter-spacing: 0.22em;
-text-transform: uppercase; color: var(–accent-dark);
-margin-bottom: 28px; width: fit-content;
-transition: background 0.4s, color 0.4s;
-}
+.sp-scene-tag { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px; background: var(–accent-light); border-radius: 40px; font-family: ‘DM Mono’, monospace; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(–accent-dark); margin-bottom: 28px; width: fit-content; transition: background 0.4s, color 0.4s; }
 .sp-title { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(44px,5.5vw,80px); font-weight: 300; line-height: 1.05; color: var(–charcoal); margin-bottom: 28px; }
 .sp-title em { font-style: italic; color: var(–accent-dark); transition: color 0.4s; }
-.sp-copy { background: var(–charcoal); color: var(–accent-light); padding: 20px 24px; font-size: 14px; line-height: 1.85; border-left: 3px solid var(–accent-dark); margin-bottom: 28px; transition: color 0.4s, border-color 0.4s; }
+.sp-copy { background: var(–charcoal); color: var(–accent-light); padding: 20px 24px; font-size: 14px; line-height: 1.85; border-left: 3px solid var(–accent-dark); margin-bottom: 28px; }
 .sp-role { font-family: ‘DM Mono’, monospace; font-size: 10px; letter-spacing: 0.18em; color: var(–stone); text-transform: uppercase; }
 .sp-hero-right { position: relative; overflow: hidden; }
 .sp-hero-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: background 0.5s; }
@@ -206,10 +167,9 @@ transition: background 0.4s, color 0.4s;
 .sp-placeholder span { font-family: ‘DM Mono’, monospace; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(–stone); }
 
 .sp-sec { padding: 100px 56px; }
-.sp-sec-label { font-family: ‘DM Mono’, monospace; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(–accent-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; transition: color 0.4s; }
-.sp-sec-label::after { content: ‘’; max-width: 48px; flex: 1; height: 1px; background: var(–accent-dark); opacity: 0.4; transition: background 0.4s; }
+.sp-sec-label { font-family: ‘DM Mono’, monospace; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(–accent-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.sp-sec-label::after { content: ‘’; max-width: 48px; flex: 1; height: 1px; background: var(–accent-dark); opacity: 0.4; }
 .sp-sec-title { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(34px,4vw,52px); font-weight: 300; line-height: 1.1; color: var(–charcoal); margin-bottom: 52px; }
-
 .sp-before { background: var(–cream); }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .img-block { width: 100%; aspect-ratio: 4/3; border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
@@ -239,7 +199,7 @@ transition: background 0.4s, color 0.4s;
 
 .sp-detail { background: var(–warm-white); }
 .detail-img { width: 100%; aspect-ratio: 3/2; border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
-.detail-line { width: 32px; height: 1px; background: var(–accent-dark); opacity: 0.4; margin-bottom: 12px; transition: background 0.4s; }
+.detail-line { width: 32px; height: 1px; background: var(–accent-dark); opacity: 0.4; margin-bottom: 12px; }
 .detail-cap { font-size: 12px; line-height: 1.8; color: var(–stone); font-style: italic; }
 
 .sp-texture { background: var(–cream); }
@@ -275,69 +235,23 @@ footer { background: var(–charcoal); padding: 52px 56px 120px; display: flex; 
 .footer-logo span { color: var(–teal-light); }
 .footer-info { font-family: ‘DM Mono’, monospace; font-size: 10px; letter-spacing: 0.16em; color: rgba(255,255,255,0.3); text-transform: uppercase; text-align: right; line-height: 1.9; }
 
-/* ── FLOATING CTA ── */
-.floating-cta {
-position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-z-index: 300; display: flex; gap: 12px; align-items: center;
-animation: floatUp 0.8s ease 0.8s both;
-}
-@keyframes floatUp {
-from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-.float-btn {
-display: flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 56px;
-font-family: ‘Noto Sans KR’, sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
-cursor: pointer; border: none; white-space: nowrap;
-transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-box-shadow: 0 8px 32px rgba(30,30,28,0.18), 0 2px 8px rgba(30,30,28,0.1);
-text-decoration: none;
-}
-.float-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(30,30,28,0.22), 0 4px 12px rgba(30,30,28,0.12); }
-.float-btn:active { transform: translateY(0); }
+/* FLOATING CTA */
+.floating-cta { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 300; display: flex; gap: 12px; align-items: center; animation: floatUp 0.8s ease 0.8s both; }
+@keyframes floatUp { from{opacity:0;transform:translateX(-50%) translateY(20px);}to{opacity:1;transform:translateX(-50%) translateY(0);} }
+.float-btn { display: flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 56px; font-family: ‘Noto Sans KR’, sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 0.04em; cursor: pointer; border: none; white-space: nowrap; transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; box-shadow: 0 8px 32px rgba(30,30,28,0.18), 0 2px 8px rgba(30,30,28,0.1); text-decoration: none; }
+.float-btn:hover { transform: translateY(-3px); }
 .float-btn-survey { background: var(–linen); color: var(–charcoal); border: 1px solid rgba(30,30,28,0.1); }
-.float-btn-survey:hover { background: var(–sand); }
 .float-btn-inquiry { background: var(–charcoal); color: var(–cream); }
-.float-btn-inquiry:hover { background: #2c2c2a; }
 .float-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; animation: pulse 2s ease infinite; }
 .float-btn-survey .float-dot { background: var(–teal-dark); }
 .float-btn-inquiry .float-dot { background: var(–teal-light); }
-@keyframes pulse {
-0%,100% { opacity:1; transform:scale(1); }
-50%      { opacity:0.45; transform:scale(0.65); }
-}
-@media (max-width: 640px) {
-.floating-cta { bottom: 20px; gap: 8px; width: calc(100% - 32px); }
-.float-btn { padding: 12px 18px; font-size: 12px; flex: 1; justify-content: center; }
-}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.45;transform:scale(0.65);} }
 
-/* ── CONTACT POPUP ── */
-.contact-popup {
-position: fixed; bottom: 96px; left: 50%;
-transform: translateX(-10%) scale(0.94);
-z-index: 400; background: var(–cream);
-border: 1px solid rgba(30,30,28,0.1); border-radius: 16px;
-padding: 24px 28px; width: 280px;
-box-shadow: 0 20px 60px rgba(30,30,28,0.16), 0 4px 16px rgba(30,30,28,0.08);
-opacity: 0; pointer-events: none;
-transition: opacity 0.22s ease, transform 0.22s ease;
-}
-.contact-popup.open {
-opacity: 1; pointer-events: all;
-transform: translateX(-10%) scale(1);
-}
-.contact-popup-arrow {
-position: absolute; bottom: -7px; left: 50%;
-transform: translateX(-50%) rotate(45deg);
-width: 13px; height: 13px; background: var(–cream);
-border-right: 1px solid rgba(30,30,28,0.1);
-border-bottom: 1px solid rgba(30,30,28,0.1);
-}
-.contact-popup-title {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 18px; font-weight: 400; letter-spacing: 0.06em; color: var(–charcoal);
-margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(–linen);
-}
+/* CONTACT POPUP */
+.contact-popup { position: fixed; bottom: 96px; left: 50%; transform: translateX(-10%) scale(0.94); z-index: 400; background: var(–cream); border: 1px solid rgba(30,30,28,0.1); border-radius: 16px; padding: 24px 28px; width: 280px; box-shadow: 0 20px 60px rgba(30,30,28,0.16); opacity: 0; pointer-events: none; transition: opacity 0.22s ease, transform 0.22s ease; }
+.contact-popup.open { opacity: 1; pointer-events: all; transform: translateX(-10%) scale(1); }
+.contact-popup-arrow { position: absolute; bottom: -7px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 13px; height: 13px; background: var(–cream); border-right: 1px solid rgba(30,30,28,0.1); border-bottom: 1px solid rgba(30,30,28,0.1); }
+.contact-popup-title { font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 400; letter-spacing: 0.06em; color: var(–charcoal); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(–linen); }
 .contact-rows { display: flex; flex-direction: column; gap: 14px; }
 .contact-row { display: flex; align-items: center; gap: 14px; }
 .contact-icon { width: 34px; height: 34px; background: var(–linen); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
@@ -345,10 +259,13 @@ margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(–linen
 .contact-value { font-size: 13px; color: var(–charcoal); text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s; }
 .contact-value:hover { color: var(–teal-dark); }
 
-@media (max-width: 640px) {
-.contact-popup { left: 50%; transform: translateX(-50%) scale(0.94); bottom: 90px; }
-.contact-popup.open { transform: translateX(-50%) scale(1); }
-}
+/* SURVEY MODAL */
+#survey-modal { display: none; position: fixed; inset: 0; z-index: 1000; background: #141210; overflow-y: auto; overflow-x: hidden; }
+#survey-modal::-webkit-scrollbar { display: none; }
+#survey-modal.open { display: block; }
+#survey-inner { width: 100%; max-width: 640px; margin: 0 auto; min-height: 100%; background: #141210; position: relative; font-family: ‘DM Sans’, sans-serif; display: flex; flex-direction: column; }
+#survey-close-btn { position: sticky; top: 0; width: 100%; background: #141210; border: none; padding: 20px 24px 0; display: flex; justify-content: flex-end; cursor: pointer; z-index: 10; }
+#survey-content { flex: 1; display: flex; flex-direction: column; }
 
 /* reveal */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -357,31 +274,21 @@ margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(–linen
 @keyframes fadeUp { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
 @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
 
-/* ── 반응형 ── */
 @media(max-width:960px){
 nav{padding:18px 24px;}
-.hero{grid-template-columns:1fr;}
-.hero-right{display:none;}
-.hero-left{padding:100px 24px 60px;}
-.intro-bar{flex-direction:column;align-items:flex-start;gap:16px;padding:40px 24px;}
-.intro-sub{text-align:left;}
-.categories-section{padding:60px 24px 80px;}
-.cat-grid{display:flex;flex-direction:column;}
-.cat-card:nth-child(n) .cat-card-inner{height:200px;}
-.cat-card:nth-child(1) .cat-name{font-size:28px;}
-.sp-hero{grid-template-columns:1fr;}
-.sp-hero-right{display:none;}
-.sp-hero-left{padding:100px 24px 56px;}
-.sp-sec{padding:72px 24px;}
-.two-col{grid-template-columns:1fr;}
-.bp-grid{grid-template-columns:1fr;}
-.tex-grid{grid-template-columns:1fr;}
-.chips{grid-template-columns:repeat(3,1fr);}
-.mats{grid-template-columns:repeat(2,1fr);}
+.hero{grid-template-columns:1fr;} .hero-right{display:none;} .hero-left{padding:100px 24px 60px;}
+.intro-bar{flex-direction:column;align-items:flex-start;gap:16px;padding:40px 24px;} .intro-sub{text-align:left;}
+.categories-section{padding:60px 24px 80px;} .cat-grid{display:flex;flex-direction:column;}
+.cat-card:nth-child(n) .cat-card-inner{height:200px;} .cat-card:nth-child(1) .cat-name{font-size:28px;}
+.sp-hero{grid-template-columns:1fr;} .sp-hero-right{display:none;} .sp-hero-left{padding:100px 24px 56px;}
+.sp-sec{padding:72px 24px;} .two-col{grid-template-columns:1fr;} .bp-grid{grid-template-columns:1fr;}
+.tex-grid{grid-template-columns:1fr;} .chips{grid-template-columns:repeat(3,1fr);} .mats{grid-template-columns:repeat(2,1fr);}
 .after-bottom{flex-direction:column;align-items:flex-start;gap:14px;padding:36px 24px;}
-.sp-note{padding:80px 24px;}
-footer{padding:40px 24px 120px;flex-direction:column;gap:20px;}
-.footer-info{text-align:left;}
+.sp-note{padding:80px 24px;} footer{padding:40px 24px 120px;flex-direction:column;gap:20px;} .footer-info{text-align:left;}
+.floating-cta{bottom:20px;gap:8px;width:calc(100% - 32px);}
+.float-btn{padding:12px 18px;font-size:12px;flex:1;justify-content:center;}
+.contact-popup{left:50%;transform:translateX(-50%) scale(0.94);bottom:90px;}
+.contact-popup.open{transform:translateX(-50%) scale(1);}
 }
 </style>
 
@@ -396,16 +303,12 @@ footer{padding:40px 24px 120px;flex-direction:column;gap:20px;}
   </div>
 </nav>
 
-<!-- FLOATING CTA -->
-
 <div class="floating-cta">
   <button class="float-btn float-btn-survey" onclick="openSurvey()">
-    <span class="float-dot"></span>
-    설문지 참여
+    <span class="float-dot"></span>설문지 참여
   </button>
   <button class="float-btn float-btn-inquiry" onclick="toggleContact(event)">
-    <span class="float-dot"></span>
-    연락처
+    <span class="float-dot"></span>연락처
   </button>
 </div>
 
@@ -419,459 +322,6 @@ footer{padding:40px 24px 120px;flex-direction:column;gap:20px;}
     <div id="survey-content"></div>
   </div>
 </div>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
-
-  /* ✅ FIX: 설문 모달 — PC·모바일 모두 화면 꽉 채우기 */
-  #survey-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: #141210;
-    overflow: hidden;
-  }
-  #survey-modal.open { display: flex; flex-direction: column; }
-
-  #survey-inner {
-    width: 100%;
-    height: 100%;
-    flex: 1;
-    overflow-y: auto;
-    background: #141210;
-    border-radius: 0;
-    position: relative;
-    font-family: 'DM Sans', sans-serif;
-    /* 넓은 PC 화면에서 콘텐츠가 너무 퍼지지 않도록 중앙 정렬 */
-    display: flex;
-    flex-direction: column;
-  }
-  #survey-inner::-webkit-scrollbar { display: none; }
-  #survey-inner { scrollbar-width: none; }
-
-  /* 콘텐츠 최대 너비 유지 (가독성) */
-  #survey-inner > * {
-    width: 100%;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #survey-close-btn {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    max-width: 100%; /* 닫기 버튼은 full-width sticky */
-    background: #141210;
-    border: none;
-    padding: 20px 24px 0;
-    display: flex;
-    justify-content: flex-end;
-    cursor: pointer;
-    z-index: 10;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  #survey-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-</style>
-
-<script>
-// ================================================================
-// ▼▼▼ 구글 스크립트 URL을 아래에 붙여넣으세요 ▼▼▼
-// ================================================================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwf2nRcyFldI_UckmInm7exy2bQkWd2Z1OclavhcoS_fsQqGKmTQ2pHPXAybDsbk7xG/exec';
-// ================================================================
-
-const SV = {
-  SECTIONS: ['스타일', '취향', '현재 공간', '예산', '일정'],
-  SPACES:   ['거실','침실','주방·다이닝','서재·작업실','현관·복도','욕실'],
-  MOODS:    ['고요하고 차분한','따뜻하고 아늑한','밝고 청량한','어둡고 감성적인','개성 있고 임팩트','깔끔하고 정갈한'],
-  STYLES:   ['모던 미니멀','스칸디나비안','와비사비','인더스트리얼','클래식','보헤미안'],
-  PORTFOLIO: {
-    '모던 미니멀':  [{url:'https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=400&q=80',title:'성수동 오피스텔'},{url:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80',title:'마포구 신혼집'}],
-    '스칸디나비안': [{url:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80',title:'판교 아파트'},{url:'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80',title:'용산 테라스하우스'}],
-    '와비사비':     [{url:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&q=80',title:'북촌 한옥 리노베이션'},{url:'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400&q=80',title:'이태원 빌라'}],
-    '인더스트리얼': [{url:'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=400&q=80',title:'을지로 스튜디오'},{url:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&q=80',title:'합정 작업실'}],
-    '클래식':       [{url:'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=400&q=80',title:'강남 펜트하우스'},{url:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80',title:'서래마을 단독주택'}],
-    '보헤미안':     [{url:'https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=400&q=80',title:'연남동 원룸'},{url:'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=80',title:'홍대 복층 하우스'}],
-  },
-  AVOID_STYLES: ['과한 패턴','너무 어두운 컬러','촌스러운 나무결','플라스틱 소재감','지나친 골드 포인트','복잡한 몰딩','무채색 일색','캐주얼/학생 느낌'],
-  COLOR_TONES:  ['웜 & 베이지','쿨 & 그레이','딥 & 다크','라이트 & 화이트','그린 & 내추럴','볼드 & 컬러풀'],
-  FUNCTIONAL:   ['수납공간 최대화','반려동물 친화적 소재','아이 안전 배려','재택근무 공간 조성','TV·미디어 환경','손님 접대에 어울리게','독서·취미 공간','식물·그린테리어 포인트'],
-  CLEAN_STATUS: ['매우 혼잡','보통','깔끔한 편','매우 정돈'],
-  PURPOSES:     ['휴식·힐링','재택근무','육아 공간','반려동물','손님 접대','취미·창작'],
-  INVEST_ITEMS: ['가구','조명','페인트','수납박스·선반','커튼·패브릭','화분·식물','액자·포스터','러그·쿠션'],
-  TIMELINE:     ['1개월 이내','3개월 이내','6개월 이내','1년 이내','미정'],
-};
-
-const FIELDS = {
-  space:'single', mood:'single', styles:'multi',
-  avoidStyles:'multi', colorTone:'single', functional:'multi',
-  problems:'text', cleanStatus:'single', purposes:'multi',
-  keepFurniture:'text', budget:'number', investItems:'multi', timeline:'single'
-};
-
-function freshState() {
-  return { page:0, space:'', mood:'', styles:[], avoidStyles:[], colorTone:'', functional:[], problems:'', cleanStatus:'', purposes:[], keepFurniture:'', budget:500, investItems:[], timeline:'' };
-}
-let sv = freshState();
-
-function openSurvey() {
-  sv = freshState();
-  document.getElementById('survey-modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  svRender();
-}
-function closeSurvey() {
-  document.getElementById('survey-modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.getElementById('survey-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeSurvey();
-});
-/* ✅ ESC 키로 모달 닫기 */
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeSurvey();
-});
-
-function svGo(dir) {
-  sv.page += dir;
-  if (sv.page === 6) {
-    fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        제출시각:       new Date().toLocaleString('ko-KR'),
-        공간:           sv.space,
-        무드:           sv.mood,
-        스타일:         sv.styles.join(', '),
-        피하고싶은스타일: sv.avoidStyles.join(', '),
-        색상톤:         sv.colorTone,
-        반영요소:       sv.functional.join(', '),
-        불만족사항:     sv.problems,
-        정리상태:       sv.cleanStatus,
-        사용목적:       sv.purposes.join(', '),
-        유지할가구:     sv.keepFurniture,
-        예산:           sv.budget + '만원',
-        투자아이템:     sv.investItems.join(', '),
-        희망시기:       sv.timeline
-      })
-    }).catch(function(err){ console.error('전송 실패:', err); });
-  }
-  var inner = document.getElementById('survey-inner');
-  inner.scrollTop = 0;
-  svRender();
-}
-function svSet(key, val) { sv[key] = val; svRender(); }
-function svToggle(key, val, max) {
-  var arr = sv[key];
-  var idx = arr.indexOf(val);
-  if (idx !== -1) { sv[key] = arr.filter(function(x){ return x !== val; }); }
-  else if (!max || arr.length < max) { sv[key] = arr.concat([val]); }
-  svRender();
-}
-
-function el(tag, styles, children) {
-  var node = document.createElement(tag);
-  if (styles) { Object.keys(styles).forEach(function(k){ node.style[k] = styles[k]; }); }
-  if (children) {
-    (Array.isArray(children) ? children : [children]).forEach(function(ch){
-      if (ch == null) return;
-      if (typeof ch === 'string') { node.appendChild(document.createTextNode(ch)); }
-      else { node.appendChild(ch); }
-    });
-  }
-  return node;
-}
-function d(styles, children) { return el('div', styles, children); }
-function s(styles, text) { var n = el('span', styles); if (text) n.textContent = text; return n; }
-function btn(styles, text, onClick) {
-  var n = el('button', styles);
-  n.type = 'button';
-  if (text) n.textContent = text;
-  if (onClick) n.addEventListener('click', onClick);
-  return n;
-}
-
-var C = {
-  bg:'#141210', bgCard:'#1C1814', bgAlt:'#1E1C1A',
-  gold:'#C4956A', goldLt:'#E8B87E', text:'#F0E8DF',
-  textMd:'#C8BDB4', textSm:'#7A706A', muted:'#5C5247',
-  dim:'#3A3530', dimmer:'#2E2926', border:'#232120',
-  ff:"'DM Sans', sans-serif", ffH:"'Playfair Display', serif",
-};
-
-function svGrid(items, key, max) {
-  var isSingle = (FIELDS[key] === 'single');
-  var grid = d({ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px' });
-  items.forEach(function(item){
-    var active = isSingle ? (sv[key] === item) : (sv[key].indexOf(item) !== -1);
-    var disabled = !isSingle && (max > 0) && !active && sv[key].length >= max;
-    var pill = d({
-      padding:'14px 10px', borderRadius:'10px', textAlign:'center',
-      background: active ? 'rgba(196,149,106,0.1)' : C.bgCard,
-      border: '1px solid ' + (active ? 'rgba(196,149,106,0.5)' : C.border),
-      color: active ? C.goldLt : disabled ? C.border : C.textSm,
-      fontSize:'13px', fontWeight: active ? '500' : '400',
-      cursor: disabled ? 'default' : 'pointer',
-      transition:'all 0.15s ease', lineHeight:'1.35', fontFamily:C.ff,
-    });
-    pill.textContent = item;
-    if (!disabled) {
-      pill.addEventListener('click', function(){
-        if (isSingle) { svSet(key, item); } else { svToggle(key, item, max); }
-      });
-      pill.addEventListener('mousedown', function(){ pill.style.transform = 'scale(0.97)'; });
-      pill.addEventListener('mouseup',   function(){ pill.style.transform = ''; });
-    }
-    grid.appendChild(알약);
-  });
-  return grid;
-}
-
-function svQ(label, hint, content) {
-  var wrap = d({ display:'flex', flexDirection:'column', gap:'12px' });
-  var top = d({});
-  var lbl = d({ color:C.textMd, fontSize:'13px', fontWeight:'500', marginBottom: hint ? '3px' : '0', fontFamily:C.ff });
-  lbl.textContent = label;
-  top.appendChild(lbl);
-  if (hint) { var h = d({ color:C.dimmer, fontSize:'11px', fontFamily:C.ff }); h.textContent = hint; top.appendChild(h); }
-  wrap.appendChild(top); wrap.appendChild(content);
-  return wrap;
-}
-
-function svTitle(sub, html) {
-  var wrap = d({});
-  var sub_ = d({ color:C.dimmer, fontSize:'10px', letterSpacing:'0.14em', textTransform:'uppercase', marginBottom:'10px', fontFamily:C.ff }); sub_.textContent = sub;
-  var h2 = document.createElement('h2');
-  h2.innerHTML = html;
-  Object.assign(h2.style, { fontFamily:C.ffH, fontSize:'28px', color:C.text, lineHeight:'1.3', margin:'0' });
-  wrap.appendChild(sub_); wrap.appendChild(h2);
-  return wrap;
-}
-
-function svNav(showBack, isLast) {
-  var wrap = d({ display:'flex', gap:'8px', paddingTop:'4px' });
-  if (showBack) {
-    var backBtn = btn({ width:'50px', height:'50px', background:C.bgCard, border:'1px solid '+C.border, borderRadius:'10px', color:C.dim, fontSize:'16px', cursor:'pointer', flexShrink:'0' }, '←', function(){ svGo(-1); });
-    wrap.appendChild(backBtn);
-  }
-  var nextBtn = btn({
-    flex:'1', padding:'15px', border:'none', borderRadius:'10px',
-    background:'linear-gradient(135deg,#C4956A,#E8B87E)',
-    color:'#1C1410', fontSize:'13px', fontWeight:'600', cursor:'pointer',
-    letterSpacing:'0.05em', fontFamily:C.ff, transition:'all 0.2s ease',
-  }, isLast ? '제출하기' : '다음', function(){ svGo(1); });
-  nextBtn.addEventListener('mouseover', function(){ nextBtn.style.transform = 'translateY(-1px)'; nextBtn.style.boxShadow = '0 6px 20px rgba(196,149,106,0.3)'; });
-  nextBtn.addEventListener('mouseout',  function(){ nextBtn.style.transform = ''; nextBtn.style.boxShadow = ''; });
-  wrap.appendChild(nextBtn);
-  return wrap;
-}
-
-function svTA(key, placeholder, rows) {
-  var ta = document.createElement('textarea');
-  ta.rows = rows || 4; ta.placeholder = placeholder; ta.value = sv[key];
-  Object.assign(ta.style, {
-    width:'100%', background:C.bgCard, border:'1px solid '+C.border,
-    borderRadius:'10px', color:C.textMd, fontSize:'13px',
-    padding:'13px 15px', resize:'none', outline:'none',
-    lineHeight:'1.7', fontFamily:C.ff, transition:'border-color 0.2s', boxSizing:'border-box',
-  });
-  ta.addEventListener('input', function(){ sv[key] = ta.value; });
-  ta.addEventListener('focus', function(){ ta.style.borderColor = C.gold; });
-  ta.addEventListener('blur',  function(){ ta.style.borderColor = C.border; });
-  return ta;
-}
-
-function svProgress(page) {
-  var wrap = d({ padding:'0 24px 4px', position:'sticky', top:'40px', zIndex:'9', background:C.bg });
-  var row = d({ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'10px' });
-  var sec = s({ color:C.gold, fontSize:'10px', letterSpacing:'0.14em', textTransform:'uppercase', fontFamily:C.ff }, SV.SECTIONS[page-1]);
-  var num = s({ color:C.dimmer, fontSize:'11px', fontFamily:C.ff }, page + ' / 5');
-  row.appendChild(sec); row.appendChild(num); wrap.appendChild(row);
-  var track = d({ height:'1px', background:C.bgAlt, position:'relative' });
-  var fill = d({ position:'absolute', top:'0', left:'0', height:'100%', background:C.gold, width:((page/5)*100)+'%', transition:'width 0.4s ease' });
-  track.appendChild(fill); wrap.appendChild(track);
-  return wrap;
-}
-
-function svRender() {
-  var content = document.getElementById('survey-content');
-  content.innerHTML = '';
-  var p = sv.page;
-  if (p === 0) { content.appendChild(svPageOpening()); return; }
-  if (p === 6) { content.appendChild(svPageDone()); return; }
-  content.appendChild(svProgress(p));
-  var pg = d({ padding:'24px 24px 52px', display:'flex', flexDirection:'column', gap:'32px' });
-
-  if (p === 1) {
-    pg.appendChild(svTitle('Q1 — Q3', '당신의 공간,<br/>어떤 느낌인가요?'));
-    pg.appendChild(svQ('가장 바꾸고 싶은 공간은?', '하나만 골라주세요', svGrid(SV.SPACES, 'space', 1)));
-    pg.appendChild(svQ('원하는 무드는?', '하나만 골라주세요', svGrid(SV.MOODS, 'mood', 1)));
-    pg.appendChild(svQ('원하는 스타일', '최대 2개', svGrid(SV.STYLES, 'styles', 2)));
-    if (sv.styles.length > 0) {
-      var portWrap = d({ display:'flex', flexDirection:'column', gap:'16px' });
-      var pt = d({ color:C.dim, fontSize:'10px', letterSpacing:'0.12em', textTransform:'uppercase', fontFamily:C.ff }); pt.textContent = '관련 프로젝트';
-      portWrap.appendChild(pt);
-      sv.styles.forEach(function(style){
-        var stLbl = d({ color:C.muted, fontSize:'11px', marginBottom:'8px', fontFamily:C.ff }); stLbl.textContent = style;
-        var grid2 = d({ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px' });
-        SV.PORTFOLIO[style].forEach(function(proj){
-          var card = d({ borderRadius:'10px', overflow:'hidden', border:'1px solid '+C.border });
-          var imgWrap = d({ position:'relative', paddingBottom:'75%', overflow:'hidden' });
-          var img = document.createElement('img');
-          img.src = proj.url; img.alt = proj.title;
-          Object.assign(img.style, { position:'absolute', inset:'0', width:'100%', height:'100%', objectFit:'cover' });
-          imgWrap.appendChild(img);
-          var cap = d({ padding:'8px 10px', background:'#1C1814', color:C.textSm, fontSize:'10px', fontFamily:C.ff }); cap.textContent = proj.title;
-          card.appendChild(imgWrap); card.appendChild(cap); grid2.appendChild(card);
-        });
-        portWrap.appendChild(stLbl); portWrap.appendChild(grid2);
-      });
-      pg.appendChild(portWrap);
-    }
-    pg.appendChild(svNav(false, false));
-  }
-
-  if (p === 2) {
-    pg.appendChild(svTitle('Q4 — Q6', '취향을<br/>더 구체화해볼게요'));
-    pg.appendChild(svQ('피하고 싶은 스타일·색감', '해당되는 것 모두', svGrid(SV.AVOID_STYLES, 'avoidStyles', 0)));
-    pg.appendChild(svQ('현재 공간의 색상 톤', '하나만 골라주세요', svGrid(SV.COLOR_TONES, 'colorTone', 1)));
-    pg.appendChild(svQ('공간에 꼭 반영하고 싶은 것', '해당되는 것 모두', svGrid(SV.FUNCTIONAL, 'functional', 0)));
-    pg.appendChild(svNav(true, false));
-  }
-
-  if (p === 3) {
-    pg.appendChild(svTitle('Q7 — Q9', '지금 공간의<br/>현재를 알려주세요'));
-    pg.appendChild(svQ('지금 가장 불만족스러운 점은?', '', svTA('problems', '예: 수납이 너무 부족하고, 조명이 어두워서 답답한 느낌이에요', 4)));
-    pg.appendChild(svQ('현재 정리 상태는?', '하나만 골라주세요', svGrid(SV.CLEAN_STATUS, 'cleanStatus', 1)));
-    pg.appendChild(svQ('공간의 주요 사용 목적', '해당되는 것 모두', svGrid(SV.PURPOSES, 'purposes', 0)));
-    pg.appendChild(svNav(true, false));
-  }
-
-  if (p === 4) {
-    pg.appendChild(svTitle('Q10 — Q12', '예산과 물건을<br/>정리해볼게요'));
-    pg.appendChild(svQ('반드시 유지할 가구나 소품', '없으면 비워두세요', svTA('keepFurniture', '예: 할머니께 받은 소파, 이케아 빌리 책장 2개', 3)));
-    var budgetWrap = d({});
-    var bigNum = s({ fontFamily:C.ffH, fontSize:'40px', color:C.goldLt });
-    bigNum.textContent = sv.budget >= 2000 ? '2000+' : sv.budget;
-    var unit = s({ color:C.muted, fontSize:'14px', marginLeft:'6px', fontFamily:C.ff }, '만원');
-    var numRow = d({ textAlign:'center', marginBottom:'18px' }, [bigNum, unit]);
-    var slider = document.createElement('input');
-    slider.type = 'range'; slider.min = 100; slider.max = 2000; slider.step = 100; slider.value = sv.budget;
-    function setPct() {
-      var pct = ((sv.budget - 100) / 1900) * 100;
-      slider.style.webkitAppearance = 'none'; slider.style.appearance = 'none';
-      slider.style.width = '100%'; slider.style.height = '2px'; slider.style.borderRadius = '2px';
-      slider.style.outline = 'none'; slider.style.cursor = 'pointer';
-      slider.style.background = 'linear-gradient(to right,#C4956A '+pct+'%,#1E1C1A '+pct+'%)';
-    }
-    setPct();
-    slider.addEventListener('input', function(){
-      sv.budget = parseInt(slider.value);
-      bigNum.textContent = sv.budget >= 2000 ? '2000+' : sv.budget;
-      setPct();
-    });
-    var labRow = d({ display:'flex', justifyContent:'space-between', marginTop:'8px' });
-    ['100만','1,000만','2,000만+'].forEach(function(t){
-      labRow.appendChild(s({ color:C.dimmer, fontSize:'10px', fontFamily:C.ff }, t));
-    });
-    budgetWrap.appendChild(numRow); budgetWrap.appendChild(slider); budgetWrap.appendChild(labRow);
-    pg.appendChild(svQ('스타일링 총 예산', '가구·조명·소품·페인트 포함', budgetWrap));
-    pg.appendChild(svQ('우선 투자하고 싶은 아이템', '최대 3개', svGrid(SV.INVEST_ITEMS, 'investItems', 3)));
-    pg.appendChild(svNav(true, false));
-  }
-
-  if (p === 5) {
-    pg.appendChild(svTitle('Q13', '마지막으로<br/>하나만 더요'));
-    pg.appendChild(svQ('희망 작업 시기', '하나만 골라주세요', svGrid(SV.TIMELINE, 'timeline', 1)));
-    pg.appendChild(svNav(true, true));
-  }
-
-  content.appendChild(pg);
-}
-
-function svPageOpening() {
-  var wrap = d({ display:'flex', flexDirection:'column', minHeight:'100%' });
-  var hero = d({
-    /* 화면에 꽉 차도록 flex 비율로 확장 */
-    flex:'0 0 auto',
-    minHeight:'40vh',
-    position:'relative', overflow:'hidden',
-    background:'linear-gradient(160deg,#2A1F15 0%,#3D2B1A 50%,#1C1410 100%)',
-    display:'flex', alignItems:'center', justifyContent:'center',
-  });
-  [[200,0.15,false],[130,0.09,false],[70,0.22,true]].forEach(function(r){
-    var ring = d({ position:'absolute', width:r[0]+'px', height:r[0]+'px', border:'1px solid rgba(196,149,106,'+r[1]+')', borderRadius: r[2] ? '0' : '50%', top:'50%', left:'50%', transform:'translate(-50%,-50%)' + (r[2] ? ' rotate(45deg)' : '') });
-    hero.appendChild(ring);
-  });
-  hero.appendChild(d({ position:'absolute', top:'20px', left:'20px', width:'26px', height:'26px', borderTop:'1px solid rgba(196,149,106,0.3)', borderLeft:'1px solid rgba(196,149,106,0.3)' }));
-  hero.appendChild(d({ position:'absolute', bottom:'20px', right:'20px', width:'26px', height:'26px', borderBottom:'1px solid rgba(196,149,106,0.3)', borderRight:'1px solid rgba(196,149,106,0.3)' }));
-  var heroTxt = d({ textAlign:'center', position:'relative', zIndex:'1' });
-  var sub = d({ color:C.gold, fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'14px', fontFamily:C.ff }); sub.textContent = 'Space Styling';
-  var line1 = document.createElement('div');
-  line1.innerHTML = '당신의<br/><em>공간</em>을';
-  Object.assign(line1.style, { fontFamily:C.ffH, fontSize:'40px', color:C.text, lineHeight:'1.15', marginBottom:'6px' });
-  var line2 = d({ fontFamily:C.ffH, fontSize:'40px', color:C.gold, lineHeight:'1.15' }); line2.textContent = '스타일링하다';
-  heroTxt.appendChild(sub); heroTxt.appendChild(line1); heroTxt.appendChild(line2);
-  hero.appendChild(heroTxt);
-  var body = d({ flex:'1', padding:'32px 28px 48px', display:'flex', flexDirection:'column' });
-  var desc = d({ color:C.textSm, fontSize:'14px', lineHeight:'1.9', marginBottom:'24px', fontFamily:C.ff });
-  desc.innerHTML = '설문은 <span style="color:'+C.goldLt+'">5분</span> 정도 소요됩니다.<br/>솔직하게 답할수록 더 정확한 제안을 드릴 수 있어요.';
-  var statsRow = d({ display:'flex', gap:'8px', marginBottom:'auto' });
-  [['13','개 질문'],['5','분 이내'],['100%','맞춤 제안']].forEach(function(item){
-    var card = d({ flex:'1', padding:'14px 6px', background:C.bgCard, borderRadius:'8px', textAlign:'center' });
-    var num = d({ fontFamily:C.ffH, fontSize:'20px', color:C.gold, marginBottom:'3px' }); num.textContent = item[0];
-    var lbl = d({ color:C.dimmer, fontSize:'10px', fontFamily:C.ff }); lbl.textContent = item[1];
-    card.appendChild(num); card.appendChild(lbl); statsRow.appendChild(card);
-  });
-  var startBtn = btn({ marginTop:'32px', width:'100%', padding:'17px', background:'linear-gradient(135deg,#C4956A,#E8B87E)', border:'none', borderRadius:'12px', color:'#1C1410', fontSize:'14px', fontWeight:'600', cursor:'pointer', letterSpacing:'0.05em', fontFamily:C.ff, display:'block' }, '시작하기', function(){ svGo(1); });
-  body.appendChild(desc); body.appendChild(statsRow); body.appendChild(startBtn);
-  wrap.appendChild(hero); wrap.appendChild(body);
-  return wrap;
-}
-
-function svPageDone() {
-  var wrap = d({ minHeight:'80vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'48px 28px', textAlign:'center' });
-  wrap.appendChild(d({ width:'1px', height:'56px', background:'linear-gradient(to bottom,transparent,#C4956A)', marginBottom:'32px' }));
-  var title = d({ fontFamily:C.ffH, fontSize:'32px', color:C.text, lineHeight:'1.3', marginBottom:'14px' }); title.textContent = '감사합니다';
-  var desc = d({ color:'#4A4540', fontSize:'13px', lineHeight:'1.9', marginBottom:'36px', maxWidth:'260px', fontFamily:C.ff });
-  desc.innerHTML = '소중한 답변을 바탕으로<br/>맞춤 공간 제안을 준비해드릴게요.<br/>곧 연락드리겠습니다.';
-  var box = d({ padding:'16px 28px', borderTop:'1px solid '+C.bgAlt, borderBottom:'1px solid '+C.bgAlt });
-  var blbl = d({ color:C.dimmer, fontSize:'10px', letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'6px', fontFamily:C.ff }); blbl.textContent = '예상 답장 시간';
-  var bval = d({ color:C.goldLt, fontSize:'13px', fontFamily:C.ff }); bval.textContent = '영업일 기준 1–2일 이내';
-  box.appendChild(blbl); box.appendChild(bval);
-  wrap.appendChild(title); wrap.appendChild(desc); wrap.appendChild(box);
-  wrap.appendChild(d({ width:'1px', height:'56px', background:'linear-gradient(to bottom,#C4956A,transparent)', marginTop:'32px' }));
-
-  /* ✅ 3초 카운트다운 후 자동 닫힘 */
-  var countNum = 3;
-  var closeBtn = btn({
-    marginTop:'28px', padding:'13px 32px',
-    background:C.bgCard, border:'1px solid '+C.border,
-    borderRadius:'10px', color:C.textSm, fontSize:'13px',
-    cursor:'pointer', fontFamily:C.ff
-  }, '닫기 (' + countNum + ')', closeSurvey);
-  var timer = setInterval(function() {
-    countNum--;
-    if (countNum <= 0) {
-      clearInterval(timer);
-      closeSurvey();
-    } else {
-      closeBtn.textContent = '닫기 (' + countNum + ')';
-    }
-  }, 1000);
-  wrap.appendChild(closeBtn);
-  return wrap;
-}
-</script>
 
 <!-- CONTACT POPUP -->
 
@@ -903,12 +353,12 @@ function svPageDone() {
   </div>
 </div>
 
-<!-- ══════════ MAIN PAGE ══════════ -->
+<!-- MAIN PAGE -->
 
 <div id="main-page" class="page active">
   <section class="hero">
     <div class="hero-left">
-      <p class="hero-eyebrow">홈 수납정리 & 스타일링 포트폴리오</p>
+      <p class="hero-eyebrow">홈 수납정리 &amp; 스타일링 포트폴리오</p>
       <h1 class="hero-title">공간을<br><em>정돈하다.</em><br>삶을 디자인하다.</h1>
       <p class="hero-desc">수납은 물건을 숨기는 것이 아닙니다.<br>동선을 설계하고 오브젝트를 큐레이션하며<br>공간이 스스로 이야기하도록 만드는 일입니다.</p>
       <button class="hero-cta" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">프로젝트 보기 <span>→</span></button>
@@ -929,12 +379,10 @@ function svPageDone() {
       </div>
     </div>
   </section>
-
   <div class="intro-bar">
     <div class="intro-text">5개 공간, <em>하나의 철학.</em><br>카테고리를 선택해 프로젝트를 확인하세요.</div>
     <div class="intro-sub">거실 · 방 · 드레스룸<br>욕실 · 다이닝룸</div>
   </div>
-
   <section class="categories-section" id="categories">
     <div class="cat-header">
       <div><p class="cat-label-text">Categories</p><h2 class="cat-title">공간별<br>프로젝트</h2></div>
@@ -948,11 +396,10 @@ function svPageDone() {
       <div class="cat-card" onclick="openSpace('dining')"><div class="cat-card-inner"><div class="cat-bg"></div><div class="cat-overlay"></div><div class="cat-info"><div><span class="cat-num">05</span><span class="cat-name">다이닝룸</span></div><div class="cat-arrow">→</div></div></div></div>
     </div>
   </section>
-
-  <footer><div class="footer-logo">Space<span>&</span>Order</div><div class="footer-info">홈 수납정리 & 스타일링 포트폴리오<br>© 2025 Space & Order Studio</div></footer>
+  <footer><div class="footer-logo">Space<span>&</span>Order</div><div class="footer-info">홈 수납정리 &amp; 스타일링 포트폴리오<br>© 2025 Space &amp; Order Studio</div></footer>
 </div>
 
-<!-- ══════════ SPACE PAGE ══════════ -->
+<!-- SPACE PAGE -->
 
 <div id="space-page" class="page">
   <section class="sp-hero">
@@ -971,7 +418,6 @@ function svPageDone() {
       </div>
     </div>
   </section>
-
   <section class="sp-sec sp-before">
     <p class="sp-sec-label reveal">01</p>
     <h2 class="sp-sec-title reveal">Before</h2>
@@ -980,19 +426,17 @@ function svPageDone() {
       <div class="reveal"><div class="img-block" id="before-b-bg"><span class="img-block-label">Before Shot B</span></div><p class="img-caption" id="before-b-cap"></p></div>
     </div>
   </section>
-
   <section class="sp-sec sp-blueprint">
     <p class="sp-sec-label reveal">02</p>
     <h2 class="sp-sec-title reveal">AI Blueprint</h2>
     <div class="bp-grid reveal">
       <div class="bp-visual"><div class="bp-grid-bg"></div><span class="bp-vis-label">시안 이미지</span></div>
       <div>
-        <div class="bp-principle"><strong>제작 원칙</strong>AI는 시각화 도구로만 활용합니다. 공간 분석·동선 설계·오브젝트 선별은 기획자의 판단으로 이루어지며, 모든 큐레이션 근거는 텍스트로 명시합니다.</div>
+        <div class="bp-principle"><strong>제작 원칙</strong>AI는 시각화 도구로만 활용합니다. 공간 분석·동선 설계·오브젝트 선별은 기획자의 판단으로 이루어집니다.</div>
         <div id="bp-items"></div>
       </div>
     </div>
   </section>
-
   <section class="sp-sec sp-after">
     <div class="after-full" id="after-bg"><div class="best-tag">★ Best Cut</div></div>
     <div class="after-bottom reveal">
@@ -1000,7 +444,6 @@ function svPageDone() {
       <div class="after-meta" id="after-meta"></div>
     </div>
   </section>
-
   <section class="sp-sec sp-detail">
     <p class="sp-sec-label reveal">04</p>
     <h2 class="sp-sec-title reveal">Organizing Detail</h2>
@@ -1009,10 +452,9 @@ function svPageDone() {
       <div class="reveal"><div class="detail-img" id="detail-b-bg"><span class="img-block-label">수납 프로토콜 ②</span></div><div class="detail-line"></div><p class="detail-cap" id="detail-b-cap"></p></div>
     </div>
   </section>
-
   <section class="sp-sec sp-texture">
     <p class="sp-sec-label reveal">05</p>
-    <h2 class="sp-sec-title reveal">Object & Texture</h2>
+    <h2 class="sp-sec-title reveal">Object &amp; Texture</h2>
     <div class="tex-grid reveal">
       <div class="tex-main" id="tex-main"></div>
       <div class="tex-side">
@@ -1021,27 +463,33 @@ function svPageDone() {
       </div>
     </div>
   </section>
-
   <section class="sp-sec sp-palette">
     <p class="sp-sec-label reveal">06</p>
-    <h2 class="sp-sec-title reveal">Color & Material Palette</h2>
+    <h2 class="sp-sec-title reveal">Color &amp; Material Palette</h2>
     <div class="chips reveal" id="chips"></div>
     <div class="mats reveal" id="mats"></div>
   </section>
-
   <section class="sp-note">
     <div class="note-inner reveal">
       <div class="note-label">Director's Note</div>
       <p class="note-text" id="note-text"></p>
-      <div class="note-sign">— Space & Order Studio</div>
+      <div class="note-sign">— Space &amp; Order Studio</div>
     </div>
   </section>
-
-  <footer><div class="footer-logo">Space<span>&</span>Order</div><div class="footer-info">홈 수납정리 & 스타일링 포트폴리오<br>© 2025 Space & Order Studio</div></footer>
+  <footer><div class="footer-logo">Space<span>&</span>Order</div><div class="footer-info">홈 수납정리 &amp; 스타일링 포트폴리오<br>© 2025 Space &amp; Order Studio</div></footer>
 </div>
 
+<!-- 단일 스크립트 블록 -->
+
 <script>
-const SPACES = {
+// ================================================================
+// ▼▼▼ 구글 스크립트 URL을 아래에 붙여넣으세요 ▼▼▼
+// ================================================================
+var GOOGLE_SCRIPT_URL = '여기에_구글_스크립트_URL_붙여넣기';
+// ================================================================
+
+/* ── 공간 데이터 ── */
+var SPACES = {
   living:{name:'거실',num:'01',accent:'#A8C4BE',accentLight:'#C8DDD9',accentDark:'#6B9E97',heroBg:'linear-gradient(145deg,#C8DDD9 0%,#A8C4BE 50%,#8AAEA7 100%)',t1:'A-01 Living Room',t2:'Reorder',copy:'비어있음이 곧 여유다.<br>이 공간은 숨을 쉰다.',baA:'linear-gradient(160deg,#E5DFD8 0%,#D0C9BF 100%)',bcA:'공간의 현재 상태 — 북쪽 벽면',baB:'linear-gradient(160deg,#DDD8D0 0%,#C8C2B8 100%)',bcB:'공간의 현재 상태 — 수납장 전면',bp:['소파와 TV 사이 동선 확보 — 최소 80cm 유지','자주 쓰는 오브젝트는 눈높이 이하 배치','포인트 컬러 오브젝트는 3개 이하로 제한','계절 용품은 최상단 또는 문 안쪽으로 분리'],afterBg:'linear-gradient(135deg,#C8DDD9 0%,#E8E3DA 50%,#D4C9B8 100%)',am:'A-01 Living Room Reorder<br>완료일 — 2025. 03<br>촬영 — 기획자 직접 촬영',daA:'linear-gradient(155deg,#C8DDD9 0%,#E8E3DA 100%)',dcA:'자주 쓰는 물건은 눈높이 이하, 계절 용품은 최상단으로 분리',daB:'linear-gradient(155deg,#D4C9B8 0%,#E8E3DA 100%)',dcB:'같은 카테고리는 한 존으로 — 시각적 노이즈를 줄이는 클러스터 방식',txM:'linear-gradient(145deg,#D4C9B8 0%,#E8E3DA 60%,#C8DDD9 100%)',txS:'linear-gradient(135deg,#A8C4BE 0%,#6B9E97 100%)',chips:[{n:'Cream White',h:'#F7F4EF',b:'#F7F4EF',br:'1px solid #E0D9CE'},{n:'Dusty Teal',h:'#A8C4BE',b:'#A8C4BE'},{n:'Teal Dark',h:'#6B9E97',b:'#6B9E97'},{n:'Warm Sand',h:'#D4C9B8',b:'#D4C9B8'},{n:'Charcoal',h:'#1E1E1C',b:'#1E1E1C'}],mats:[{l:'Oak Wood',b:'linear-gradient(135deg,#C8A882,#B08A5E)'},{l:'Linen Fabric',b:'linear-gradient(135deg,#D6D2CC,#C4C0B8)'},{l:'Matte Ceramic',b:'linear-gradient(135deg,#A8C4BE,#85ADA5)'},{l:'Black Steel',b:'linear-gradient(135deg,#2E2E2C,#1A1A18)'}],note:'좋은 공간은 <em>설명하지 않아도</em><br>스스로 말을 합니다.<br><br>거실은 집의 첫 문장입니다.<br>그 문장을 <em>단단하고 조용하게</em> 쓰는 것,<br>그것이 이 프로젝트의 전부였습니다.'},
   bedroom:{name:'방',num:'02',accent:'#B8C8D0',accentLight:'#D4E2E8',accentDark:'#7A9EB0',heroBg:'linear-gradient(145deg,#D4E2E8 0%,#B8C8D0 50%,#90AABB 100%)',t1:'B-01 Bedroom',t2:'Calm',copy:'잠들기 전, 마지막으로 보는 공간이<br>이래야 한다.',baA:'linear-gradient(160deg,#E2DED8 0%,#D2CEC8 100%)',bcA:'공간의 현재 상태 — 침대 헤드 벽면',baB:'linear-gradient(160deg,#DAD6D0 0%,#C8C4BC 100%)',bcB:'공간의 현재 상태 — 옷장 및 사이드테이블',bp:['침대 양측 동선 최소 60cm 확보','취침 전 사용 물건만 사이드테이블에 배치','수면을 방해하는 전자기기는 동선 밖으로 이동','조명은 간접광 위주, 눈 피로 최소화'],afterBg:'linear-gradient(135deg,#D4E2E8 0%,#EAE6E0 50%,#D4C9B8 100%)',am:'B-01 Bedroom Calm<br>완료일 — 2025. 03<br>촬영 — 기획자 직접 촬영',daA:'linear-gradient(155deg,#D4E2E8 0%,#E8E3DA 100%)',dcA:'침구류는 계절별로 — 현재 시즌 외 아이템은 압축팩으로 분리 보관',daB:'linear-gradient(155deg,#E2DCD4 0%,#EAE6E0 100%)',dcB:'사이드테이블은 최소 3가지 이하의 오브젝트만 — 노이즈 없는 취침 환경',txM:'linear-gradient(145deg,#D4E2E8 0%,#E8E3DA 60%,#D4C9B8 100%)',txS:'linear-gradient(135deg,#B8C8D0 0%,#7A9EB0 100%)',chips:[{n:'Cream White',h:'#F7F4EF',b:'#F7F4EF',br:'1px solid #E0D9CE'},{n:'Slate Blue',h:'#B8C8D0',b:'#B8C8D0'},{n:'Steel Blue',h:'#7A9EB0',b:'#7A9EB0'},{n:'Warm Sand',h:'#D4C9B8',b:'#D4C9B8'},{n:'Charcoal',h:'#1E1E1C',b:'#1E1E1C'}],mats:[{l:'Oak Wood',b:'linear-gradient(135deg,#C8A882,#B08A5E)'},{l:'Cotton Bedding',b:'linear-gradient(135deg,#E4E0DA,#D0CCC6)'},{l:'Velvet Cushion',b:'linear-gradient(135deg,#B8C8D0,#90AABB)'},{l:'Black Frame',b:'linear-gradient(135deg,#2E2E2C,#1A1A18)'}],note:'방은 <em>하루의 마지막 장면</em>입니다.<br><br>눈을 감기 전 보는 공간이<br>어지럽다면, 마음도 어지럽습니다.<br>이 공간을 <em>조용하고 단단하게</em> 정돈했습니다.'},
   dressroom:{name:'드레스룸',num:'03',accent:'#C4B8D4',accentLight:'#DCD4E8',accentDark:'#8A789E',heroBg:'linear-gradient(145deg,#DCD4E8 0%,#C4B8D4 50%,#A094B8 100%)',t1:'C-01 Dressroom',t2:'Edit',copy:'옷을 고르는 시간이 짧아질수록<br>하루가 가벼워진다.',baA:'linear-gradient(160deg,#E0DCD8 0%,#D0CCC8 100%)',bcA:'공간의 현재 상태 — 행거 및 상하단 수납',baB:'linear-gradient(160deg,#D8D4D0 0%,#C8C4C0 100%)',bcB:'공간의 현재 상태 — 소품·액세서리 수납',bp:['자주 입는 옷은 눈높이 행거에, 계절 외 옷은 상단 수납','컬러 그라데이션 정렬로 시각적 통일감 확보','소품은 투명 케이스 또는 오픈 트레이로 가시성 유지','하단 수납박스는 라벨링으로 즉시 식별 가능하게'],afterBg:'linear-gradient(135deg,#DCD4E8 0%,#EAE6E0 50%,#D4C9B8 100%)',am:'C-01 Dressroom Edit<br>완료일 — 2025. 03<br>촬영 — 기획자 직접 촬영',daA:'linear-gradient(155deg,#DCD4E8 0%,#E8E3DA 100%)',dcA:'컬러별 정렬 — 밝은 컬러에서 어두운 컬러 순으로 시각 흐름 정리',daB:'linear-gradient(155deg,#C4B8D4 0%,#D4C9B8 100%)',dcB:'액세서리는 오픈 트레이에 — 열지 않아도 한눈에 보이는 구조',txM:'linear-gradient(145deg,#DCD4E8 0%,#E8E3DA 60%,#C4B8D4 100%)',txS:'linear-gradient(135deg,#C4B8D4 0%,#8A789E 100%)',chips:[{n:'Cream White',h:'#F7F4EF',b:'#F7F4EF',br:'1px solid #E0D9CE'},{n:'Soft Mauve',h:'#C4B8D4',b:'#C4B8D4'},{n:'Muted Plum',h:'#8A789E',b:'#8A789E'},{n:'Warm Sand',h:'#D4C9B8',b:'#D4C9B8'},{n:'Charcoal',h:'#1E1E1C',b:'#1E1E1C'}],mats:[{l:'Oak Shelf',b:'linear-gradient(135deg,#C8A882,#B08A5E)'},{l:'Acrylic Box',b:'linear-gradient(135deg,#F0ECE8,#E0DCD8)'},{l:'Velvet Tray',b:'linear-gradient(135deg,#C4B8D4,#A094B8)'},{l:'Black Hanger',b:'linear-gradient(135deg,#2E2E2C,#1A1A18)'}],note:'드레스룸은 <em>하루를 시작하는 공간</em>입니다.<br><br>어디에 무엇이 있는지 알면<br>선택에 에너지를 낭비하지 않아도 됩니다.<br><em>편집된 공간</em>이 편집된 하루를 만듭니다.'},
@@ -1049,117 +497,518 @@ const SPACES = {
   dining:{name:'다이닝룸',num:'05',accent:'#C4B49C',accentLight:'#D8CCBC',accentDark:'#96806A',heroBg:'linear-gradient(145deg,#D8CCBC 0%,#C4B49C 50%,#A8927C 100%)',t1:'E-01 Dining Room',t2:'Table',copy:'식탁은 하루를 시작하고 마무리하는<br>의식의 공간이다.',baA:'linear-gradient(160deg,#E0DCD6 0%,#D0CCC6 100%)',bcA:'공간의 현재 상태 — 식탁 및 의자 배치',baB:'linear-gradient(160deg,#DADAD4 0%,#C8C8C2 100%)',bcB:'공간의 현재 상태 — 수납장·주방 연결 구역',bp:['식탁 위는 항상 비워두는 것을 원칙으로 — 식사 시에만 세팅','자주 쓰는 식기는 오픈 선반 전면, 나머지는 캐비닛 안으로','조명은 식탁 정중앙, 시선이 테이블로 모이는 구도','포인트 오브젝트는 꽃병 또는 캔들 하나로 최소화'],afterBg:'linear-gradient(135deg,#D8CCBC 0%,#E8E3DA 50%,#D4C9B8 100%)',am:'E-01 Dining Room Table<br>완료일 — 2025. 03<br>촬영 — 기획자 직접 촬영',daA:'linear-gradient(155deg,#D8CCBC 0%,#E8E3DA 100%)',dcA:'식기 오픈 선반 — 자주 쓰는 것은 전면, 나머지는 안쪽으로 깊이감 연출',daB:'linear-gradient(155deg,#C4B49C 0%,#D4C9B8 100%)',dcB:'테이블 세팅 룰 — 식사 전후 즉시 원상복귀, 빈 테이블이 기본 상태',txM:'linear-gradient(145deg,#D8CCBC 0%,#E8E3DA 60%,#C4B49C 100%)',txS:'linear-gradient(135deg,#C4B49C 0%,#96806A 100%)',chips:[{n:'Cream White',h:'#F7F4EF',b:'#F7F4EF',br:'1px solid #E0D9CE'},{n:'Warm Latte',h:'#C4B49C',b:'#C4B49C'},{n:'Warm Brown',h:'#96806A',b:'#96806A'},{n:'Warm Sand',h:'#D4C9B8',b:'#D4C9B8'},{n:'Charcoal',h:'#1E1E1C',b:'#1E1E1C'}],mats:[{l:'Walnut Table',b:'linear-gradient(135deg,#B8906A,#9A7050)'},{l:'White Ware',b:'linear-gradient(135deg,#E8E4E0,#D8D4D0)'},{l:'Rattan Chair',b:'linear-gradient(135deg,#C4B49C,#96806A)'},{l:'Iron Fixture',b:'linear-gradient(135deg,#2E2E2C,#1A1A18)'}],note:'다이닝룸은 <em>의식의 공간</em>입니다.<br><br>비워진 식탁 위에 놓인 한 송이 꽃,<br>그것이 식사의 밀도를 바꿉니다.<br><em>덜어내는 것</em>이 가장 아름다운 스타일링입니다.'}
 };
 
-const root = document.documentElement;
-
-function renderSpace(key) {
-  const spData = SPACES[key];
-  if (!spData) return;
-
-  /* ✅ FIX 4: setProperty double-hyphen 수정 */
-  root.style.setProperty('--accent', spData.accent);
-  root.style.setProperty('--accent-light', spData.accentLight);
-  root.style.setProperty('--accent-dark', spData.accentDark);
-
-  document.getElementById('sp-num').textContent = spData.num;
-  document.getElementById('sp-name-tag').textContent = spData.name;
-  document.getElementById('sp-title').innerHTML = `${spData.t1}<br><em>${spData.t2}</em>`;
-  document.getElementById('sp-copy').innerHTML = `"${spData.copy}"`;
-  document.getElementById('sp-hero-bg').style.background = spData.heroBg;
-  document.getElementById('before-a-bg').style.background = spData.baA;
-  document.getElementById('before-a-cap').textContent = spData.bcA;
-  document.getElementById('before-b-bg').style.background = spData.baB;
-  document.getElementById('before-b-cap').textContent = spData.bcB;
-  document.getElementById('bp-items').innerHTML = spData.bp.map((t,i) =>
-    `<div class="bp-row"><span class="bp-num">0${i+1}</span><span class="bp-text">${t}</span></div>`
-  ).join('');
-  document.getElementById('after-bg').style.background = spData.afterBg;
-  document.getElementById('after-meta').innerHTML = spData.am;
-  document.getElementById('detail-a-bg').style.background = spData.daA;
-  document.getElementById('detail-a-cap').textContent = `"${spData.dcA}"`;
-  document.getElementById('detail-b-bg').style.background = spData.daB;
-  document.getElementById('detail-b-cap').textContent = `"${spData.dcB}"`;
-  document.getElementById('tex-main').style.background = spData.txM;
-  document.getElementById('tex-sm1').style.background = spData.txS;
-  document.getElementById('chips').innerHTML = spData.chips.map(c =>
-    `<div class="chip"><div class="chip-sw" style="background:${c.b};${c.br?'border:'+c.br:''}"></div><span class="chip-name">${c.n}</span><span class="chip-hex">${c.h}</span></div>`
-  ).join('');
-  document.getElementById('mats').innerHTML = spData.mats.map(m =>
-    `<div class="mat-item"><div class="mat-sw" style="background:${m.b}"></div><span class="mat-label">${m.l}</span></div>`
-  ).join('');
-  document.getElementById('note-text').innerHTML = spData.note;
-
-  const tag = document.getElementById('nav-tag');
-  tag.textContent = spData.name;
-  tag.style.color = spData.accentDark;
-  tag.style.borderColor = spData.accentDark;
-  tag.classList.add('show');
-  document.getElementById('nav-back').classList.add('show');
-
-  document.querySelectorAll('#space-page .reveal').forEach(el => el.classList.remove('visible'));
-  document.getElementById('main-page').classList.remove('active');
-  document.getElementById('space-page').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  setTimeout(initReveal, 80);
-}
-
-function renderHome() {
-  document.getElementById('space-page').classList.remove('active');
-  document.getElementById('main-page').classList.add('active');
-  document.getElementById('nav-tag').classList.remove('show');
-  document.getElementById('nav-back').classList.remove('show');
-  window.scrollTo({ top: 0, behavior: 'instant' });
-}
-
+/* ── 페이지 전환 ── */
 function openSpace(key) {
-  try { history.pushState({ space: key }, '', '#' + key); } catch(e) {}
   renderSpace(key);
 }
-
 function goHome() {
-  try { history.back(); } catch(e) {}
   renderHome();
 }
-
-window.addEventListener('popstate', (e) => {
-  if (e.state && e.state.space) { renderSpace(e.state.space); }
-  else { renderHome(); }
-});
-
-(function init() {
-  history.replaceState({ space: null }, '', location.href);
-})();
-
-function initReveal() {
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('#space-page .reveal:not(.visible)').forEach(el => obs.observe(el));
+function renderSpace(key) {
+  var sp = SPACES[key];
+  if (!sp) return;
+  var root = document.documentElement;
+  root.style.setProperty('--accent', sp.accent);
+  root.style.setProperty('--accent-light', sp.accentLight);
+  root.style.setProperty('--accent-dark', sp.accentDark);
+  document.getElementById('sp-num').textContent = sp.num;
+  document.getElementById('sp-name-tag').textContent = sp.name;
+  document.getElementById('sp-title').innerHTML = sp.t1 + '<br><em>' + sp.t2 + '</em>';
+  document.getElementById('sp-copy').innerHTML = '"' + sp.copy + '"';
+  document.getElementById('sp-hero-bg').style.background = sp.heroBg;
+  document.getElementById('before-a-bg').style.background = sp.baA;
+  document.getElementById('before-a-cap').textContent = sp.bcA;
+  document.getElementById('before-b-bg').style.background = sp.baB;
+  document.getElementById('before-b-cap').textContent = sp.bcB;
+  var bpHtml = '';
+  for (var i = 0; i < sp.bp.length; i++) {
+    bpHtml += '<div class="bp-row"><span class="bp-num">0' + (i+1) + '</span><span class="bp-text">' + sp.bp[i] + '</span></div>';
+  }
+  document.getElementById('bp-items').innerHTML = bpHtml;
+  document.getElementById('after-bg').style.background = sp.afterBg;
+  document.getElementById('after-meta').innerHTML = sp.am;
+  document.getElementById('detail-a-bg').style.background = sp.daA;
+  document.getElementById('detail-a-cap').textContent = '"' + sp.dcA + '"';
+  document.getElementById('detail-b-bg').style.background = sp.daB;
+  document.getElementById('detail-b-cap').textContent = '"' + sp.dcB + '"';
+  document.getElementById('tex-main').style.background = sp.txM;
+  document.getElementById('tex-sm1').style.background = sp.txS;
+  var chipsHtml = '';
+  for (var j = 0; j < sp.chips.length; j++) {
+    var c = sp.chips[j];
+    chipsHtml += '<div class="chip"><div class="chip-sw" style="background:' + c.b + ';' + (c.br ? 'border:' + c.br : '') + '"></div><span class="chip-name">' + c.n + '</span><span class="chip-hex">' + c.h + '</span></div>';
+  }
+  document.getElementById('chips').innerHTML = chipsHtml;
+  var matsHtml = '';
+  for (var k = 0; k < sp.mats.length; k++) {
+    var m = sp.mats[k];
+    matsHtml += '<div class="mat-item"><div class="mat-sw" style="background:' + m.b + '"></div><span class="mat-label">' + m.l + '</span></div>';
+  }
+  document.getElementById('mats').innerHTML = matsHtml;
+  document.getElementById('note-text').innerHTML = sp.note;
+  var tag = document.getElementById('nav-tag');
+  tag.textContent = sp.name;
+  tag.style.color = sp.accentDark;
+  tag.style.borderColor = sp.accentDark;
+  tag.className = 'nav-scene-tag show';
+  document.getElementById('nav-back').className = 'nav-back-btn show';
+  var reveals = document.querySelectorAll('#space-page .reveal');
+  for (var r = 0; r < reveals.length; r++) { reveals[r].classList.remove('visible'); }
+  document.getElementById('main-page').className = 'page';
+  document.getElementById('space-page').className = 'page active';
+  window.scrollTo(0, 0);
+  setTimeout(initReveal, 80);
+}
+function renderHome() {
+  document.getElementById('space-page').className = 'page';
+  document.getElementById('main-page').className = 'page active';
+  document.getElementById('nav-tag').className = 'nav-scene-tag';
+  document.getElementById('nav-back').className = 'nav-back-btn';
+  window.scrollTo(0, 0);
 }
 
-/* ✅ FIX: 스크롤 핸들러 — PC/모바일 padding 분리 */
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('main-nav');
-  const isMobile = window.innerWidth <= 960;
-  if (isMobile) {
+/* ── reveal ── */
+function initReveal() {
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        entries[i].target.classList.add('visible');
+        obs.unobserve(entries[i].target);
+      }
+    }
+  }, { threshold: 0.1 });
+  var els = document.querySelectorAll('#space-page .reveal:not(.visible)');
+  for (var i = 0; i < els.length; i++) { obs.observe(els[i]); }
+}
+
+/* ── 스크롤 nav ── */
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('main-nav');
+  if (window.innerWidth <= 960) {
     nav.style.padding = '18px 24px';
   } else {
     nav.style.padding = window.scrollY > 60 ? '14px 56px' : '24px 56px';
   }
 });
 
+/* ── 연락처 팝업 ── */
 function toggleContact(e) {
   e.stopPropagation();
-  const popup = document.getElementById('contact-popup');
-  popup.classList.toggle('open');
+  var popup = document.getElementById('contact-popup');
+  if (popup.classList.contains('open')) {
+    popup.classList.remove('open');
+  } else {
+    popup.classList.add('open');
+  }
 }
-
-/* ✅ FIX 3: 'ent.addEventListener' → 'document.addEventListener' */
 document.addEventListener('click', function(e) {
-  const popup = document.getElementById('contact-popup');
+  var popup = document.getElementById('contact-popup');
   if (popup.classList.contains('open') && !popup.contains(e.target)) {
     popup.classList.remove('open');
   }
 });
+
+/* ═══════════════════════════════════
+   설문 시스템
+═══════════════════════════════════ */
+var SV = {
+  SECTIONS: ['스타일', '취향', '현재 공간', '예산', '일정'],
+  SPACES:   ['거실','침실','주방·다이닝','서재·작업실','현관·복도','욕실'],
+  MOODS:    ['고요하고 차분한','따뜻하고 아늑한','밝고 청량한','어둡고 감성적인','개성 있고 임팩트','깔끔하고 정갈한'],
+  STYLES:   ['모던 미니멀','스칸디나비안','와비사비','인더스트리얼','클래식','보헤미안'],
+  PORTFOLIO: {
+    '모던 미니멀':  [{url:'https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=400&q=80',title:'성수동 오피스텔'},{url:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80',title:'마포구 신혼집'}],
+    '스칸디나비안': [{url:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80',title:'판교 아파트'},{url:'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80',title:'용산 테라스하우스'}],
+    '와비사비':     [{url:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&q=80',title:'북촌 한옥 리노베이션'},{url:'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400&q=80',title:'이태원 빌라'}],
+    '인더스트리얼': [{url:'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=400&q=80',title:'을지로 스튜디오'},{url:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&q=80',title:'합정 작업실'}],
+    '클래식':       [{url:'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=400&q=80',title:'강남 펜트하우스'},{url:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80',title:'서래마을 단독주택'}],
+    '보헤미안':     [{url:'https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=400&q=80',title:'연남동 원룸'},{url:'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=80',title:'홍대 복층 하우스'}]
+  },
+  AVOID_STYLES: ['과한 패턴','너무 어두운 컬러','촌스러운 나무결','플라스틱 소재감','지나친 골드 포인트','복잡한 몰딩','무채색 일색','캐주얼/학생 느낌'],
+  COLOR_TONES:  ['웜 & 베이지','쿨 & 그레이','딥 & 다크','라이트 & 화이트','그린 & 내추럴','볼드 & 컬러풀'],
+  FUNCTIONAL:   ['수납공간 최대화','반려동물 친화적 소재','아이 안전 배려','재택근무 공간 조성','TV·미디어 환경','손님 접대에 어울리게','독서·취미 공간','식물·그린테리어 포인트'],
+  CLEAN_STATUS: ['매우 혼잡','보통','깔끔한 편','매우 정돈'],
+  PURPOSES:     ['휴식·힐링','재택근무','육아 공간','반려동물','손님 접대','취미·창작'],
+  INVEST_ITEMS: ['가구','조명','페인트','수납박스·선반','커튼·패브릭','화분·식물','액자·포스터','러그·쿠션'],
+  TIMELINE:     ['1개월 이내','3개월 이내','6개월 이내','1년 이내','미정']
+};
+
+var FIELDS = {
+  space:'single', mood:'single', styles:'multi',
+  avoidStyles:'multi', colorTone:'single', functional:'multi',
+  problems:'text', cleanStatus:'single', purposes:'multi',
+  keepFurniture:'text', budget:'number', investItems:'multi', timeline:'single'
+};
+
+function freshState() {
+  return { page:0, space:'', mood:'', styles:[], avoidStyles:[], colorTone:'', functional:[], problems:'', cleanStatus:'', purposes:[], keepFurniture:'', budget:500, investItems:[], timeline:'' };
+}
+var sv = freshState();
+
+var C = {
+  bg:'#141210', bgCard:'#1C1814', bgAlt:'#1E1C1A',
+  gold:'#C4956A', goldLt:'#E8B87E', text:'#F0E8DF',
+  textMd:'#C8BDB4', textSm:'#7A706A', muted:'#5C5247',
+  dim:'#3A3530', dimmer:'#2E2926', border:'#232120',
+  ff:"'DM Sans', sans-serif", ffH:"'Playfair Display', serif"
+};
+
+function openSurvey() {
+  sv = freshState();
+  document.getElementById('survey-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  svRender();
+}
+function closeSurvey() {
+  document.getElementById('survey-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('survey-modal').addEventListener('click', function(e) {
+  if (e.target === this) { closeSurvey(); }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeSurvey(); }
+});
+
+function svGo(dir) {
+  sv.page += dir;
+  if (sv.page === 6) {
+    try {
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          제출시각: new Date().toLocaleString('ko-KR'),
+          공간: sv.space, 무드: sv.mood,
+          스타일: sv.styles.join(', '), 피하고싶은스타일: sv.avoidStyles.join(', '),
+          색상톤: sv.colorTone, 반영요소: sv.functional.join(', '),
+          불만족사항: sv.problems, 정리상태: sv.cleanStatus,
+          사용목적: sv.purposes.join(', '), 유지할가구: sv.keepFurniture,
+          예산: sv.budget + '만원', 투자아이템: sv.investItems.join(', '),
+          희망시기: sv.timeline
+        })
+      });
+    } catch(e) {}
+  }
+  document.getElementById('survey-modal').scrollTop = 0;
+  svRender();
+}
+
+function svSet(key, val) { sv[key] = val; svRender(); }
+function svToggle(key, val, max) {
+  var arr = sv[key];
+  var idx = arr.indexOf(val);
+  if (idx !== -1) {
+    sv[key] = arr.filter(function(x) { return x !== val; });
+  } else if (!max || arr.length < max) {
+    sv[key] = arr.concat([val]);
+  }
+  svRender();
+}
+
+function mkEl(tag, styles, html) {
+  var node = document.createElement(tag);
+  if (styles) {
+    var keys = Object.keys(styles);
+    for (var i = 0; i < keys.length; i++) { node.style[keys[i]] = styles[keys[i]]; }
+  }
+  if (html !== undefined) { node.innerHTML = html; }
+  return node;
+}
+function mkDiv(styles, html) { return mkEl('div', styles, html); }
+function mkBtn(styles, text, onClick) {
+  var n = document.createElement('button');
+  n.type = 'button';
+  n.textContent = text;
+  if (styles) {
+    var keys = Object.keys(styles);
+    for (var i = 0; i < keys.length; i++) { n.style[keys[i]] = styles[keys[i]]; }
+  }
+  if (onClick) { n.addEventListener('click', onClick); }
+  return n;
+}
+
+function svGrid(items, key, max) {
+  var isSingle = (FIELDS[key] === 'single');
+  var grid = mkDiv({display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px'});
+  for (var i = 0; i < items.length; i++) {
+    (function(item) {
+      var active = isSingle ? (sv[key] === item) : (sv[key].indexOf(item) !== -1);
+      var disabled = !isSingle && max > 0 && !active && sv[key].length >= max;
+      var pill = mkDiv({
+        padding:'14px 10px', borderRadius:'10px', textAlign:'center',
+        background: active ? 'rgba(196,149,106,0.1)' : C.bgCard,
+        border: '1px solid ' + (active ? 'rgba(196,149,106,0.5)' : C.border),
+        color: active ? C.goldLt : disabled ? C.border : C.textSm,
+        fontSize:'13px', fontWeight: active ? '500' : '400',
+        cursor: disabled ? 'default' : 'pointer',
+        transition:'all 0.15s ease', lineHeight:'1.35', fontFamily:C.ff
+      }, item);
+      if (!disabled) {
+        pill.addEventListener('click', function() {
+          if (isSingle) { svSet(key, item); } else { svToggle(key, item, max); }
+        });
+      }
+      grid.appendChild(알약);
+    })(items[i]);
+  }
+  return grid;
+}
+
+function svQ(label, hint, content) {
+  var wrap = mkDiv({display:'flex', flexDirection:'column', gap:'12px'});
+  var lbl = mkDiv({color:C.textMd, fontSize:'13px', fontWeight:'500', fontFamily:C.ff, marginBottom: hint ? '3px' : '0'}, label);
+  wrap.appendChild(lbl);
+  if (hint) { wrap.appendChild(mkDiv({color:C.dimmer, fontSize:'11px', fontFamily:C.ff}, hint)); }
+  wrap.appendChild(content);
+  return wrap;
+}
+
+function svTitle(sub, html) {
+  var wrap = mkDiv({});
+  wrap.appendChild(mkDiv({color:C.dimmer, fontSize:'10px', letterSpacing:'0.14em', textTransform:'uppercase', marginBottom:'10px', fontFamily:C.ff}, sub));
+  var h2 = document.createElement('h2');
+  h2.innerHTML = html;
+  h2.style.fontFamily = C.ffH; h2.style.fontSize = '28px';
+  h2.style.color = C.text; h2.style.lineHeight = '1.3'; h2.style.margin = '0';
+  wrap.appendChild(h2);
+  return wrap;
+}
+
+function svNav(showBack, isLast) {
+  var wrap = mkDiv({display:'flex', gap:'8px', paddingTop:'4px'});
+  if (showBack) {
+    wrap.appendChild(mkBtn({
+      width:'50px', height:'50px', background:C.bgCard, border:'1px solid '+C.border,
+      borderRadius:'10px', color:C.dim, fontSize:'16px', cursor:'pointer', flexShrink:'0'
+    }, '←', function() { svGo(-1); }));
+  }
+  var nextBtn = mkBtn({
+    flex:'1', padding:'15px', border:'none', borderRadius:'10px',
+    background:'linear-gradient(135deg,#C4956A,#E8B87E)',
+    color:'#1C1410', fontSize:'13px', fontWeight:'600', cursor:'pointer',
+    letterSpacing:'0.05em', fontFamily:C.ff
+  }, isLast ? '제출하기' : '다음', function() { svGo(1); });
+  wrap.appendChild(nextBtn);
+  return wrap;
+}
+
+function svTA(key, placeholder, rows) {
+  var ta = document.createElement('textarea');
+  ta.rows = rows || 4; ta.placeholder = placeholder; ta.value = sv[key];
+  ta.style.width = '100%'; ta.style.background = C.bgCard;
+  ta.style.border = '1px solid ' + C.border; ta.style.borderRadius = '10px';
+  ta.style.color = C.textMd; ta.style.fontSize = '13px';
+  ta.style.padding = '13px 15px'; ta.style.resize = 'none';
+  ta.style.outline = 'none'; ta.style.lineHeight = '1.7';
+  ta.style.fontFamily = C.ff; ta.style.boxSizing = 'border-box';
+  ta.addEventListener('input', function() { sv[key] = ta.value; });
+  ta.addEventListener('focus', function() { ta.style.borderColor = C.gold; });
+  ta.addEventListener('blur', function() { ta.style.borderColor = C.border; });
+  return ta;
+}
+
+function svProgress(page) {
+  var wrap = mkDiv({padding:'0 24px 4px', position:'sticky', top:'0', zIndex:'9', background:C.bg});
+  var row = mkDiv({display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'10px'});
+  var sec = document.createElement('span');
+  sec.textContent = SV.SECTIONS[page-1];
+  sec.style.color = C.gold; sec.style.fontSize = '10px';
+  sec.style.letterSpacing = '0.14em'; sec.style.textTransform = 'uppercase'; sec.style.fontFamily = C.ff;
+  var num = document.createElement('span');
+  num.textContent = page + ' / 5';
+  num.style.color = C.dimmer; num.style.fontSize = '11px'; num.style.fontFamily = C.ff;
+  row.appendChild(sec); row.appendChild(num); wrap.appendChild(row);
+  var track = mkDiv({height:'1px', background:C.bgAlt, position:'relative'});
+  var fill = mkDiv({position:'absolute', top:'0', left:'0', height:'100%', background:C.gold, width:((page/5)*100)+'%', transition:'width 0.4s ease'});
+  track.appendChild(fill); wrap.appendChild(track);
+  return wrap;
+}
+
+function svRender() {
+  var content = document.getElementById('survey-content');
+  content.innerHTML = '';
+  var p = sv.page;
+  if (p === 0) { content.appendChild(svPageOpening()); return; }
+  if (p === 6) { content.appendChild(svPageDone()); return; }
+  content.appendChild(svProgress(p));
+  var pg = mkDiv({padding:'24px 24px 52px', display:'flex', flexDirection:'column', gap:'32px'});
+
+  if (p === 1) {
+    pg.appendChild(svTitle('Q1 — Q3', '당신의 공간,<br/>어떤 느낌인가요?'));
+    pg.appendChild(svQ('가장 바꾸고 싶은 공간은?', '하나만 골라주세요', svGrid(SV.SPACES, 'space', 1)));
+    pg.appendChild(svQ('원하는 무드는?', '하나만 골라주세요', svGrid(SV.MOODS, 'mood', 1)));
+    pg.appendChild(svQ('원하는 스타일', '최대 2개', svGrid(SV.STYLES, 'styles', 2)));
+    if (sv.styles.length > 0) {
+      var portWrap = mkDiv({display:'flex', flexDirection:'column', gap:'16px'});
+      portWrap.appendChild(mkDiv({color:C.dim, fontSize:'10px', letterSpacing:'0.12em', textTransform:'uppercase', fontFamily:C.ff}, '관련 프로젝트'));
+      for (var si = 0; si < sv.styles.length; si++) {
+        var style = sv.styles[si];
+        var projs = SV.PORTFOLIO[style];
+        portWrap.appendChild(mkDiv({color:C.muted, fontSize:'11px', marginBottom:'8px', fontFamily:C.ff}, style));
+        var grid2 = mkDiv({display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px'});
+        for (var pi = 0; pi < projs.length; pi++) {
+          var proj = projs[pi];
+          var card = mkDiv({borderRadius:'10px', overflow:'hidden', border:'1px solid '+C.border});
+          var imgWrap = mkDiv({position:'relative', paddingBottom:'75%', overflow:'hidden'});
+          var img = document.createElement('img');
+          img.src = proj.url; img.alt = proj.title;
+          img.style.position = 'absolute'; img.style.inset = '0';
+          img.style.width = '100%'; img.style.height = '100%'; img.style.objectFit = 'cover';
+          imgWrap.appendChild(img);
+          card.appendChild(imgWrap);
+          card.appendChild(mkDiv({padding:'8px 10px', background:'#1C1814', color:C.textSm, fontSize:'10px', fontFamily:C.ff}, proj.title));
+          grid2.appendChild(card);
+        }
+        portWrap.appendChild(grid2);
+      }
+      pg.appendChild(portWrap);
+    }
+    pg.appendChild(svNav(false, false));
+  }
+  if (p === 2) {
+    pg.appendChild(svTitle('Q4 — Q6', '취향을<br/>더 구체화해볼게요'));
+    pg.appendChild(svQ('피하고 싶은 스타일·색감', '해당되는 것 모두', svGrid(SV.AVOID_STYLES, 'avoidStyles', 0)));
+    pg.appendChild(svQ('현재 공간의 색상 톤', '하나만 골라주세요', svGrid(SV.COLOR_TONES, 'colorTone', 1)));
+    pg.appendChild(svQ('공간에 꼭 반영하고 싶은 것', '해당되는 것 모두', svGrid(SV.FUNCTIONAL, 'functional', 0)));
+    pg.appendChild(svNav(true, false));
+  }
+  if (p === 3) {
+    pg.appendChild(svTitle('Q7 — Q9', '지금 공간의<br/>현재를 알려주세요'));
+    pg.appendChild(svQ('지금 가장 불만족스러운 점은?', '', svTA('problems', '예: 수납이 너무 부족하고, 조명이 어두워서 답답한 느낌이에요', 4)));
+    pg.appendChild(svQ('현재 정리 상태는?', '하나만 골라주세요', svGrid(SV.CLEAN_STATUS, 'cleanStatus', 1)));
+    pg.appendChild(svQ('공간의 주요 사용 목적', '해당되는 것 모두', svGrid(SV.PURPOSES, 'purposes', 0)));
+    pg.appendChild(svNav(true, false));
+  }
+  if (p === 4) {
+    pg.appendChild(svTitle('Q10 — Q12', '예산과 물건을<br/>정리해볼게요'));
+    pg.appendChild(svQ('반드시 유지할 가구나 소품', '없으면 비워두세요', svTA('keepFurniture', '예: 할머니께 받은 소파, 이케아 빌리 책장 2개', 3)));
+    var budgetWrap = mkDiv({});
+    var bigNum = document.createElement('span');
+    bigNum.textContent = sv.budget >= 2000 ? '2000+' : sv.budget;
+    bigNum.style.fontFamily = C.ffH; bigNum.style.fontSize = '40px'; bigNum.style.color = C.goldLt;
+    var unit = document.createElement('span');
+    unit.textContent = '만원';
+    unit.style.color = C.muted; unit.style.fontSize = '14px'; unit.style.marginLeft = '6px'; unit.style.fontFamily = C.ff;
+    var numRow = mkDiv({textAlign:'center', marginBottom:'18px'});
+    numRow.appendChild(bigNum); numRow.appendChild(unit);
+    var slider = document.createElement('input');
+    slider.type = 'range'; slider.min = 100; slider.max = 2000; slider.step = 100; slider.value = sv.budget;
+    function setPct() {
+      var pct = ((sv.budget - 100) / 1900) * 100;
+      slider.style.webkitAppearance = 'none'; slider.style.appearance = 'none';
+      slider.style.width = '100%'; slider.style.height = '2px';
+      slider.style.borderRadius = '2px'; slider.style.outline = 'none'; slider.style.cursor = 'pointer';
+      slider.style.background = 'linear-gradient(to right,#C4956A ' + pct + '%,#1E1C1A ' + pct + '%)';
+    }
+    setPct();
+    slider.addEventListener('input', function() {
+      sv.budget = parseInt(slider.value);
+      bigNum.textContent = sv.budget >= 2000 ? '2000+' : sv.budget;
+      setPct();
+    });
+    var labRow = mkDiv({display:'flex', justifyContent:'space-between', marginTop:'8px'});
+    var labs = ['100만','1,000만','2,000만+'];
+    for (var li = 0; li < labs.length; li++) {
+      var lsp = document.createElement('span');
+      lsp.textContent = labs[li];
+      lsp.style.color = C.dimmer; lsp.style.fontSize = '10px'; lsp.style.fontFamily = C.ff;
+      labRow.appendChild(lsp);
+    }
+    budgetWrap.appendChild(numRow); budgetWrap.appendChild(slider); budgetWrap.appendChild(labRow);
+    pg.appendChild(svQ('스타일링 총 예산', '가구·조명·소품·페인트 포함', budgetWrap));
+    pg.appendChild(svQ('우선 투자하고 싶은 아이템', '최대 3개', svGrid(SV.INVEST_ITEMS, 'investItems', 3)));
+    pg.appendChild(svNav(true, false));
+  }
+  if (p === 5) {
+    pg.appendChild(svTitle('Q13', '마지막으로<br/>하나만 더요'));
+    pg.appendChild(svQ('희망 작업 시기', '하나만 골라주세요', svGrid(SV.TIMELINE, 'timeline', 1)));
+    pg.appendChild(svNav(true, true));
+  }
+  content.appendChild(pg);
+}
+
+function svPageOpening() {
+  var wrap = mkDiv({display:'flex', flexDirection:'column', minHeight:'100%'});
+  var hero = mkDiv({
+    flex:'0 0 auto', minHeight:'40vh', position:'relative', overflow:'hidden',
+    background:'linear-gradient(160deg,#2A1F15 0%,#3D2B1A 50%,#1C1410 100%)',
+    display:'flex', alignItems:'center', justifyContent:'center'
+  });
+  var rings = [[200,0.15,false],[130,0.09,false],[70,0.22,true]];
+  for (var ri = 0; ri < rings.length; ri++) {
+    var r = rings[ri];
+    var ring = mkDiv({
+      position:'absolute', width:r[0]+'px', height:r[0]+'px',
+      border:'1px solid rgba(196,149,106,'+r[1]+')',
+      borderRadius: r[2] ? '0' : '50%', top:'50%', left:'50%',
+      transform:'translate(-50%,-50%)' + (r[2] ? ' rotate(45deg)' : '')
+    });
+    hero.appendChild(ring);
+  }
+  hero.appendChild(mkDiv({position:'absolute', top:'20px', left:'20px', width:'26px', height:'26px', borderTop:'1px solid rgba(196,149,106,0.3)', borderLeft:'1px solid rgba(196,149,106,0.3)'}));
+  hero.appendChild(mkDiv({position:'absolute', bottom:'20px', right:'20px', width:'26px', height:'26px', borderBottom:'1px solid rgba(196,149,106,0.3)', borderRight:'1px solid rgba(196,149,106,0.3)'}));
+  var heroTxt = mkDiv({textAlign:'center', position:'relative', zIndex:'1'});
+  heroTxt.appendChild(mkDiv({color:C.gold, fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'14px', fontFamily:C.ff}, 'Space Styling'));
+  var line1 = document.createElement('div');
+  line1.innerHTML = '당신의<br/><em>공간</em>을';
+  line1.style.fontFamily = C.ffH; line1.style.fontSize = '40px';
+  line1.style.color = C.text; line1.style.lineHeight = '1.15'; line1.style.marginBottom = '6px';
+  heroTxt.appendChild(line1);
+  heroTxt.appendChild(mkDiv({fontFamily:C.ffH, fontSize:'40px', color:C.gold, lineHeight:'1.15'}, '스타일링하다'));
+  hero.appendChild(heroTxt);
+  var body = mkDiv({flex:'1', padding:'32px 28px 48px', display:'flex', flexDirection:'column'});
+  var desc = mkDiv({color:C.textSm, fontSize:'14px', lineHeight:'1.9', marginBottom:'24px', fontFamily:C.ff});
+  desc.innerHTML = '설문은 <span style="color:' + C.goldLt + '">5분</span> 정도 소요됩니다.<br/>솔직하게 답할수록 더 정확한 제안을 드릴 수 있어요.';
+  body.appendChild(desc);
+  var statsRow = mkDiv({display:'flex', gap:'8px', marginBottom:'auto'});
+  var stats = [['13','개 질문'],['5','분 이내'],['100%','맞춤 제안']];
+  for (var si2 = 0; si2 < stats.length; si2++) {
+    var card = mkDiv({flex:'1', padding:'14px 6px', background:C.bgCard, borderRadius:'8px', textAlign:'center'});
+    card.appendChild(mkDiv({fontFamily:C.ffH, fontSize:'20px', color:C.gold, marginBottom:'3px'}, stats[si2][0]));
+    card.appendChild(mkDiv({color:C.dimmer, fontSize:'10px', fontFamily:C.ff}, stats[si2][1]));
+    statsRow.appendChild(card);
+  }
+  body.appendChild(statsRow);
+  body.appendChild(mkBtn({
+    marginTop:'32px', width:'100%', padding:'17px',
+    background:'linear-gradient(135deg,#C4956A,#E8B87E)',
+    border:'none', borderRadius:'12px', color:'#1C1410',
+    fontSize:'14px', fontWeight:'600', cursor:'pointer',
+    letterSpacing:'0.05em', fontFamily:C.ff, display:'block'
+  }, '시작하기', function() { svGo(1); }));
+  wrap.appendChild(hero); wrap.appendChild(body);
+  return wrap;
+}
+
+function svPageDone() {
+  var wrap = mkDiv({minHeight:'80vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'48px 28px', textAlign:'center'});
+  wrap.appendChild(mkDiv({width:'1px', height:'56px', background:'linear-gradient(to bottom,transparent,#C4956A)', marginBottom:'32px'}));
+  wrap.appendChild(mkDiv({fontFamily:C.ffH, fontSize:'32px', color:C.text, lineHeight:'1.3', marginBottom:'14px'}, '감사합니다'));
+  var desc = mkDiv({color:'#4A4540', fontSize:'13px', lineHeight:'1.9', marginBottom:'36px', maxWidth:'260px', fontFamily:C.ff});
+  desc.innerHTML = '소중한 답변을 바탕으로<br/>맞춤 공간 제안을 준비해드릴게요.<br/>곧 연락드리겠습니다.';
+  wrap.appendChild(desc);
+  var box = mkDiv({padding:'16px 28px', borderTop:'1px solid '+C.bgAlt, borderBottom:'1px solid '+C.bgAlt});
+  box.appendChild(mkDiv({color:C.dimmer, fontSize:'10px', letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'6px', fontFamily:C.ff}, '예상 답장 시간'));
+  box.appendChild(mkDiv({color:C.goldLt, fontSize:'13px', fontFamily:C.ff}, '영업일 기준 1–2일 이내'));
+  wrap.appendChild(box);
+  wrap.appendChild(mkDiv({width:'1px', height:'56px', background:'linear-gradient(to bottom,#C4956A,transparent)', marginTop:'32px'}));
+  var countNum = 3;
+  var closeBtn = mkBtn({
+    marginTop:'28px', padding:'13px 32px',
+    background:C.bgCard, border:'1px solid '+C.border,
+    borderRadius:'10px', color:C.textSm, fontSize:'13px',
+    cursor:'pointer', fontFamily:C.ff
+  }, '닫기 (' + countNum + ')', closeSurvey);
+  var timer = setInterval(function() {
+    countNum--;
+    if (countNum <= 0) { clearInterval(timer); closeSurvey(); }
+    else { closeBtn.textContent = '닫기 (' + countNum + ')'; }
+  }, 1000);
+  wrap.appendChild(closeBtn);
+  return wrap;
+}
 </script>
 
 </body>
