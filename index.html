@@ -24,12 +24,12 @@
     --accent-dark: #6B9E97;
   }
 
-/* [수정 1] - { } → * { } (유니버설 셀렉터 오타) */
+/* ✅ FIX 1: ‘- {}’ → ‘* {}’ */
 
 - { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-  /* [수정 2] 전체: var(–xxx) → var(–xxx) (en dash → double hyphen) */
+  /* ✅ FIX 2: var(–xxx) en-dash → var(–xxx) double-hyphen 전체 수정 */
   background: var(–cream);
   color: var(–charcoal);
   font-family: ‘Noto Sans KR’, sans-serif;
@@ -78,9 +78,7 @@ from { opacity: 0; transform: translateY(16px); }
 to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ══════════════════
-MAIN PAGE
-══════════════════ */
+/* ══════════════════ MAIN PAGE ══════════════════ */
 #main-page { padding-top: 80px; }
 
 .hero {
@@ -184,9 +182,7 @@ transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
 .cat-arrow { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); font-size: 16px; transform: translateY(8px); opacity: 0; transition: all 0.3s; }
 .cat-card:hover .cat-arrow { transform: translateY(0); opacity: 1; background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
 
-/* ══════════════════
-SPACE PAGE
-══════════════════ */
+/* ══════════════════ SPACE PAGE ══════════════════ */
 #space-page { padding-top: 72px; }
 
 .sp-hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
@@ -318,7 +314,7 @@ text-decoration: none;
 /* ── CONTACT POPUP ── */
 .contact-popup {
 position: fixed; bottom: 96px; left: 50%;
-transform: translateX(40%) scale(0.94);
+transform: translateX(-10%) scale(0.94);
 z-index: 400; background: var(–cream);
 border: 1px solid rgba(30,30,28,0.1); border-radius: 16px;
 padding: 24px 28px; width: 280px;
@@ -328,7 +324,7 @@ transition: opacity 0.22s ease, transform 0.22s ease;
 }
 .contact-popup.open {
 opacity: 1; pointer-events: all;
-transform: translateX(40%) scale(1);
+transform: translateX(-10%) scale(1);
 }
 .contact-popup-arrow {
 position: absolute; bottom: -7px; left: 50%;
@@ -361,7 +357,7 @@ margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(–linen
 @keyframes fadeUp { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
 @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
 
-/* responsive */
+/* ── 반응형 ── */
 @media(max-width:960px){
 nav{padding:18px 24px;}
 .hero{grid-template-columns:1fr;}
@@ -415,10 +411,10 @@ footer{padding:40px 24px 120px;flex-direction:column;gap:20px;}
 
 <!-- SURVEY MODAL -->
 
-<div id="survey-modal" style="position:fixed;inset:0;z-index:1000;background:rgba(15,13,12,0.88);backdrop-filter:blur(8px);justify-content:center;align-items:flex-end;">
-  <div id="survey-inner" style="width:100%;max-width:430px;max-height:92vh;overflow-y:auto;background:#141210;border-radius:24px 24px 0 0;position:relative;font-family:'DM Sans',sans-serif;">
-    <button onclick="closeSurvey()" style="position:sticky;top:0;left:0;right:0;width:100%;background:#141210;border:none;padding:16px 24px 0;display:flex;justify-content:flex-end;cursor:pointer;z-index:10;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3A3530" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+<div id="survey-modal">
+  <div id="survey-inner">
+    <button id="survey-close-btn" onclick="closeSurvey()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A706A" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div id="survey-content"></div>
   </div>
@@ -426,33 +422,72 @@ footer{padding:40px 24px 120px;flex-direction:column;gap:20px;}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
-  #survey-modal { display:none; }
-  #survey-modal.open { display:flex; }
-  #survey-inner::-webkit-scrollbar { display:none; }
-  .sv-press { transition:all 0.15s ease; cursor:pointer; }
-  .sv-press:active { transform:scale(0.97); }
-  .sv-cta { transition:all 0.2s ease; }
-  .sv-cta:hover { box-shadow:0 6px 20px rgba(196,149,106,0.3); transform:translateY(-1px); }
-  .sv-cta:active { transform:scale(0.98); }
-  .sv-pill {
-    padding:14px 10px; border-radius:10px; text-align:center;
-    font-size:13px; cursor:pointer; transition:all 0.15s ease; line-height:1.35;
-    background:#1C1814; border:1px solid #232120; color:#7A706A;
+
+  /* ✅ FIX: 설문 모달 — PC·모바일 모두 화면 꽉 채우기 */
+  #survey-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #141210;
+    overflow: hidden;
   }
-  .sv-pill.active { background:rgba(196,149,106,0.1); border-color:rgba(196,149,106,0.5); color:#E8B87E; font-weight:500; }
-  .sv-pill.disabled { color:#232120; cursor:default; }
-  .sv-textarea {
-    width:100%; background:#1C1814; border:1px solid #232120; border-radius:10px;
-    color:#C8BDB4; font-size:13px; padding:13px 15px; resize:none; outline:none;
-    line-height:1.7; font-family:'DM Sans',sans-serif; transition:border-color 0.2s;
+  #survey-modal.open { display: flex; flex-direction: column; }
+
+  #survey-inner {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    overflow-y: auto;
+    background: #141210;
+    border-radius: 0;
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
+    /* 넓은 PC 화면에서 콘텐츠가 너무 퍼지지 않도록 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
   }
-  .sv-textarea:focus { border-color:#C4956A; }
-  input[type=range].sv-range { -webkit-appearance:none; appearance:none; width:100%; height:2px; border-radius:2px; outline:none; cursor:pointer; }
-  input[type=range].sv-range::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:#C4956A; border:3px solid #141210; box-shadow:0 0 0 1.5px #C4956A; cursor:pointer; }
+  #survey-inner::-webkit-scrollbar { display: none; }
+  #survey-inner { scrollbar-width: none; }
+
+  /* 콘텐츠 최대 너비 유지 (가독성) */
+  #survey-inner > * {
+    width: 100%;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #survey-close-btn {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 100%; /* 닫기 버튼은 full-width sticky */
+    background: #141210;
+    border: none;
+    padding: 20px 24px 0;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    z-index: 10;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #survey-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 </style>
 
 <script>
-// ── SURVEY DATA ──
+// ================================================================
+// ▼▼▼ 구글 스크립트 URL을 아래에 붙여넣으세요 ▼▼▼
+// ================================================================
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwf2nRcyFldI_UckmInm7exy2bQkWd2Z1OclavhcoS_fsQqGKmTQ2pHPXAybDsbk7xG/exec';
+// ================================================================
+
 const SV = {
   SECTIONS: ['스타일', '취향', '현재 공간', '예산', '일정'],
   SPACES:   ['거실','침실','주방·다이닝','서재·작업실','현관·복도','욕실'],
@@ -483,13 +518,7 @@ const FIELDS = {
 };
 
 function freshState() {
-  return {
-    page:0,
-    space:'', mood:'', styles:[],
-    avoidStyles:[], colorTone:'', functional:[],
-    problems:'', cleanStatus:'', purposes:[],
-    keepFurniture:'', budget:500, investItems:[], timeline:''
-  };
+  return { page:0, space:'', mood:'', styles:[], avoidStyles:[], colorTone:'', functional:[], problems:'', cleanStatus:'', purposes:[], keepFurniture:'', budget:500, investItems:[], timeline:'' };
 }
 let sv = freshState();
 
@@ -506,14 +535,40 @@ function closeSurvey() {
 document.getElementById('survey-modal').addEventListener('click', function(e) {
   if (e.target === this) closeSurvey();
 });
+/* ✅ ESC 키로 모달 닫기 */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSurvey();
+});
 
 function svGo(dir) {
   sv.page += dir;
+  if (sv.page === 6) {
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        제출시각:       new Date().toLocaleString('ko-KR'),
+        공간:           sv.space,
+        무드:           sv.mood,
+        스타일:         sv.styles.join(', '),
+        피하고싶은스타일: sv.avoidStyles.join(', '),
+        색상톤:         sv.colorTone,
+        반영요소:       sv.functional.join(', '),
+        불만족사항:     sv.problems,
+        정리상태:       sv.cleanStatus,
+        사용목적:       sv.purposes.join(', '),
+        유지할가구:     sv.keepFurniture,
+        예산:           sv.budget + '만원',
+        투자아이템:     sv.investItems.join(', '),
+        희망시기:       sv.timeline
+      })
+    }).catch(function(err){ console.error('전송 실패:', err); });
+  }
   var inner = document.getElementById('survey-inner');
   inner.scrollTop = 0;
   svRender();
 }
-
 function svSet(key, val) { sv[key] = val; svRender(); }
 function svToggle(key, val, max) {
   var arr = sv[key];
@@ -627,7 +682,7 @@ function svTA(key, placeholder, rows) {
     width:'100%', background:C.bgCard, border:'1px solid '+C.border,
     borderRadius:'10px', color:C.textMd, fontSize:'13px',
     padding:'13px 15px', resize:'none', outline:'none',
-    lineHeight:'1.7', fontFamily:C.ff, transition:'border-color 0.2s',
+    lineHeight:'1.7', fontFamily:C.ff, transition:'border-color 0.2s', boxSizing:'border-box',
   });
   ta.addEventListener('input', function(){ sv[key] = ta.value; });
   ta.addEventListener('focus', function(){ ta.style.borderColor = C.gold; });
@@ -744,11 +799,14 @@ function svRender() {
 }
 
 function svPageOpening() {
-  var wrap = d({ display:'flex', flexDirection:'column' });
+  var wrap = d({ display:'flex', flexDirection:'column', minHeight:'100%' });
   var hero = d({
-    height:'260px', position:'relative', overflow:'hidden',
+    /* 화면에 꽉 차도록 flex 비율로 확장 */
+    flex:'0 0 auto',
+    minHeight:'40vh',
+    position:'relative', overflow:'hidden',
     background:'linear-gradient(160deg,#2A1F15 0%,#3D2B1A 50%,#1C1410 100%)',
-    display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'24px 24px 0 0',
+    display:'flex', alignItems:'center', justifyContent:'center',
   });
   [[200,0.15,false],[130,0.09,false],[70,0.22,true]].forEach(function(r){
     var ring = d({ position:'absolute', width:r[0]+'px', height:r[0]+'px', border:'1px solid rgba(196,149,106,'+r[1]+')', borderRadius: r[2] ? '0' : '50%', top:'50%', left:'50%', transform:'translate(-50%,-50%)' + (r[2] ? ' rotate(45deg)' : '') });
@@ -792,7 +850,24 @@ function svPageDone() {
   box.appendChild(blbl); box.appendChild(bval);
   wrap.appendChild(title); wrap.appendChild(desc); wrap.appendChild(box);
   wrap.appendChild(d({ width:'1px', height:'56px', background:'linear-gradient(to bottom,#C4956A,transparent)', marginTop:'32px' }));
-  var closeBtn = btn({ marginTop:'28px', padding:'13px 32px', background:C.bgCard, border:'1px solid '+C.border, borderRadius:'10px', color:C.textSm, fontSize:'13px', cursor:'pointer', fontFamily:C.ff }, '닫기', closeSurvey);
+
+  /* ✅ 3초 카운트다운 후 자동 닫힘 */
+  var countNum = 3;
+  var closeBtn = btn({
+    marginTop:'28px', padding:'13px 32px',
+    background:C.bgCard, border:'1px solid '+C.border,
+    borderRadius:'10px', color:C.textSm, fontSize:'13px',
+    cursor:'pointer', fontFamily:C.ff
+  }, '닫기 (' + countNum + ')', closeSurvey);
+  var timer = setInterval(function() {
+    countNum--;
+    if (countNum <= 0) {
+      clearInterval(timer);
+      closeSurvey();
+    } else {
+      closeBtn.textContent = '닫기 (' + countNum + ')';
+    }
+  }, 1000);
   wrap.appendChild(closeBtn);
   return wrap;
 }
@@ -977,10 +1052,10 @@ const SPACES = {
 const root = document.documentElement;
 
 function renderSpace(key) {
-  /* [수정 5] 변수명 d → spData (전역 헬퍼 함수 d()와 충돌 방지) */
   const spData = SPACES[key];
   if (!spData) return;
 
+  /* ✅ FIX 4: setProperty double-hyphen 수정 */
   root.style.setProperty('--accent', spData.accent);
   root.style.setProperty('--accent-light', spData.accentLight);
   root.style.setProperty('--accent-dark', spData.accentDark);
@@ -1035,7 +1110,6 @@ function renderHome() {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-/* [수정 6] history.pushState를 try/catch로 감싸 file:// 환경에서도 안전하게 동작 */
 function openSpace(key) {
   try { history.pushState({ space: key }, '', '#' + key); } catch(e) {}
   renderSpace(key);
@@ -1062,17 +1136,24 @@ function initReveal() {
   document.querySelectorAll('#space-page .reveal:not(.visible)').forEach(el => obs.observe(el));
 }
 
+/* ✅ FIX: 스크롤 핸들러 — PC/모바일 padding 분리 */
 window.addEventListener('scroll', () => {
-  document.getElementById('main-nav').style.padding = window.scrollY > 60 ? '14px 56px' : '24px 56px';
+  const nav = document.getElementById('main-nav');
+  const isMobile = window.innerWidth <= 960;
+  if (isMobile) {
+    nav.style.padding = '18px 24px';
+  } else {
+    nav.style.padding = window.scrollY > 60 ? '14px 56px' : '24px 56px';
+  }
 });
 
-/* [수정 4] toggleContact 함수 완성 (본문이 잘려 있었음) */
 function toggleContact(e) {
   e.stopPropagation();
   const popup = document.getElementById('contact-popup');
   popup.classList.toggle('open');
 }
 
+/* ✅ FIX 3: 'ent.addEventListener' → 'document.addEventListener' */
 document.addEventListener('click', function(e) {
   const popup = document.getElementById('contact-popup');
   if (popup.classList.contains('open') && !popup.contains(e.target)) {
